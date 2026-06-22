@@ -1,18 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  const cursorX = useSpring(-100, { stiffness: 500, damping: 28, mass: 0.5 });
-  const cursorY = useSpring(-100, { stiffness: 500, damping: 28, mass: 0.5 });
-  
-  const ringX = useSpring(-100, { stiffness: 150, damping: 20, mass: 0.8 });
-  const ringY = useSpring(-100, { stiffness: 150, damping: 20, mass: 0.8 });
 
   useEffect(() => {
     setIsMounted(true);
@@ -23,11 +17,14 @@ export function CustomCursor() {
       return;
     }
 
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 4); // center of 8px dot
-      cursorY.set(e.clientY - 4);
-      ringX.set(e.clientX - 18); // center of 36px ring
-      ringY.set(e.clientY - 18);
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -38,43 +35,56 @@ export function CustomCursor() {
         target.closest("a") ||
         target.closest("button")
       ) {
-        setIsHovering(true);
+        ringRef.current?.classList.add("scale-[1.5]", "opacity-80");
+        ringRef.current?.classList.remove("opacity-40");
       } else {
-        setIsHovering(false);
+        ringRef.current?.classList.remove("scale-[1.5]", "opacity-80");
+        ringRef.current?.classList.add("opacity-40");
       }
     };
 
     window.addEventListener("mousemove", moveCursor, { passive: true });
     window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
+    let animationFrameId: number;
+
+    const render = () => {
+      // Smooth interpolation for the outer ring (0.15 factor for smooth trail)
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX - 18}px, ${ringY - 18}px, 0)`;
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [cursorX, cursorY, ringX, ringY]);
+  }, []);
 
   if (!isMounted || isTouchDevice) return null;
 
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          x: cursorX,
-          y: cursorY,
-        }}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999] mix-blend-difference will-change-transform"
+        style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
-      <motion.div
-        className="fixed top-0 left-0 w-9 h-9 border border-accent rounded-full pointer-events-none z-[9998] mix-blend-difference"
-        style={{
-          x: ringX,
-          y: ringY,
-        }}
-        animate={{
-          scale: isHovering ? 1.5 : 1,
-          opacity: isHovering ? 0.8 : 0.4,
-        }}
-        transition={{ duration: 0.2 }}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 w-9 h-9 border border-accent rounded-full pointer-events-none z-[9998] mix-blend-difference will-change-transform opacity-40 transition-all duration-200 ease-out"
+        style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
     </>
   );
