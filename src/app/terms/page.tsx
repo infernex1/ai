@@ -41,7 +41,7 @@ export default function TermsOfService() {
                 <FileText className="text-accent" size={22} /> 1. Acceptance of Terms
               </h2>
               <p>
-                By accessing Infernex AI's website and utilizing our custom services (including custom AI Voice Agents, CRM setups, automation pipelines, and website design/development), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please do not use our services.
+                By accessing Infernex AI&apos;s website and utilizing our custom services (including custom AI Voice Agents, CRM setups, automation pipelines, and website design/development), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, please do not use our services.
               </p>
             </div>
 
