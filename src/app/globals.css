@@ -2,26 +2,194 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-primary: #F5F2EF;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #555555;
+    --border: rgba(196, 30, 58, 0.2);
+    --card-border: rgba(0, 0, 0, 0.08);
+  }
+
+  .dark {
+    --bg-primary: #0C0C0C;
+    --bg-secondary: #141414;
+    --bg-card: #1A1A1A;
+    --text-primary: #F0EDE8;
+    --text-secondary: #A0A0A0;
+    --border: rgba(196, 30, 58, 0.15);
+    --card-border: rgba(255, 255, 255, 0.06);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M40 0H0v40h40V0zM1 39H0V0h1v39zm39 0h-1V0h1v39z' fill='%23C41E3A' fill-opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+  }
+}
+
+@media (hover: none) {
+  .hover-disable {
+    pointer-events: none !important;
+  }
+}
+
+/* GPU-Accelerated Background Orbs Animations */
+@keyframes orb-float-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate3d(50px, -30px, 0) scale(1.2);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes orb-float-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(-60px, 40px, 0) scale(1.3);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.2;
+  }
+}
+
+@keyframes orb-float-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(100px, -50px, 0) scale(1.2);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes orb-float-4 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-100px, 100px, 0) scale(1.5);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-orb-1 {
+  animation: orb-float-1 15s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-orb-2 {
+  animation: orb-float-2 20s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-orb-3 {
+  animation: orb-float-3 20s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-orb-4 {
+  animation: orb-float-4 25s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* GPU-Accelerated Ticker Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+/* FAQ Override Custom CSS */
+.faq-container-closed {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+}
+.dark .faq-container-closed {
+  background-color: #141414 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.faq-container-open {
+  background-color: #F8F8F8 !important;
+  border: 1px solid rgba(196, 30, 58, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 20px 24px !important;
+}
+.dark .faq-container-open {
+  background-color: #1A1A1A !important;
+  border: 1px solid rgba(196, 30, 58, 0.3) !important;
+}
+
+.faq-question {
+  color: #1A1A1A !important;
+  font-weight: 600 !important;
+  font-size: 17px !important;
+}
+.dark .faq-question {
+  color: #F0EDE8 !important;
+}
+
+.faq-answer {
+  color: #555555 !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+.dark .faq-answer {
+  color: #A0A0A0 !important;
+}
+
+.faq-toggle-icon {
+  color: #C41E3A !important;
+  font-size: 20px !important;
+  font-weight: 300 !important;
 }
