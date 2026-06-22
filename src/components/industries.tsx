@@ -161,7 +161,7 @@ const GroceryAnimation = () => (
         </filter>
       </defs>
       {/* Shopping Cart */}
-      <path d="M 80 80 L 120 80 L 150 180 L 280 180 L 310 100 L 130 100" stroke="#C41E3A" strokeWidth="4" strokeLinecap="round" strokeJoin="round" fill="none" className="opacity-80 dark:opacity-60" filter="url(#glow-grocery)" />
+      <path d="M 80 80 L 120 80 L 150 180 L 280 180 L 310 100 L 130 100" stroke="#C41E3A" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" className="opacity-80 dark:opacity-60" filter="url(#glow-grocery)" />
       <circle cx="170" cy="210" r="10" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" filter="url(#glow-grocery)" />
       <circle cx="260" cy="210" r="10" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" filter="url(#glow-grocery)" />
       {/* Cart Grid/Lines */}
