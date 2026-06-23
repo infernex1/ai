@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "Infernex — AI Agency for Modern Businesses",
   description: "We build AI agents, websites, and automation that grow your business 24/7. Setup in 48 hours. Fully done for you. Start today.",
   keywords: "AI agent for gyms, AI receptionist, business automation, AI agency India",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
