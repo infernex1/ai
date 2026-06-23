@@ -134,7 +134,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start lg:items-center">
           
           {/* Left Column: Animation Showcase */}
           <div className="hidden lg:flex flex-col items-center justify-center relative min-h-[620px] w-full py-6">
@@ -249,7 +249,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Multi-step Form */}
-          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-10 shadow-2xl relative">
             <AnimatePresence mode="wait">
               {!isSuccess ? (
                 <motion.div
