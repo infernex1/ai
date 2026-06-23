@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { CustomCursor } from "@/components/custom-cursor";
+import dynamic from "next/dynamic";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
+const CustomCursor = dynamic(
+  () => import("@/components/custom-cursor").then((mod) => ({ default: mod.CustomCursor })),
+  { ssr: false }
+);
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Infernex — AI Agency for Modern Businesses",
@@ -20,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-primary text-primary transition-colors duration-300`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-primary text-primary`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
