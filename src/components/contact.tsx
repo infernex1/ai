@@ -141,15 +141,15 @@ export default function Contact() {
             
             {/* ANIMATION: PHONE MOCKUP */}
             <motion.div 
-              initial={{ y: 40, opacity: 0 }}
+              initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative z-10"
             >
               <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
                 className="relative w-[240px] md:w-[260px] h-[420px] bg-[#F5F5F5] dark:bg-[#0F0F0F] border-[6px] border-[#E0E0E0] dark:border-[#2A2A2A] rounded-[40px] shadow-[0_25px_80px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
               >
                 {/* Subtle reflection gradient */}
@@ -173,13 +173,13 @@ export default function Contact() {
                   {/* 1. New Lead */}
                   <motion.div
                     animate={{
-                      y: [-80, 0, 0, 0, -80],
+                      y: [-60, 0, 0, 0, -60],
                       opacity: [0, 1, 1, 1, 0]
                     }}
                     transition={{
-                      duration: 10,
+                      duration: 6,
                       repeat: Infinity,
-                      times: [0, 0.05, 0.85, 0.9, 1],
+                      times: [0, 0.06, 0.82, 0.9, 1],
                       ease: "circOut"
                     }}
                     className="bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex gap-3 items-start w-full relative z-30"
@@ -196,13 +196,13 @@ export default function Contact() {
                   {/* 2. Inbox Notification */}
                   <motion.div
                     animate={{
-                      y: [-80, 0, 0, 0, -80],
+                      y: [-60, 0, 0, 0, -60],
                       opacity: [0, 1, 1, 1, 0]
                     }}
                     transition={{
-                      duration: 10,
+                      duration: 6,
                       repeat: Infinity,
-                      times: [0.15, 0.2, 0.85, 0.9, 1],
+                      times: [0.12, 0.18, 0.82, 0.9, 1],
                       ease: "circOut"
                     }}
                     className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg gap-3 items-start w-full relative z-20"
@@ -222,13 +222,13 @@ export default function Contact() {
                   {/* 3. Dashboard Card */}
                   <motion.div
                     animate={{
-                      y: [-80, 0, 0, 0, -80],
+                      y: [-60, 0, 0, 0, -60],
                       opacity: [0, 1, 1, 1, 0]
                     }}
                     transition={{
-                      duration: 10,
+                      duration: 6,
                       repeat: Infinity,
-                      times: [0.3, 0.35, 0.85, 0.9, 1],
+                      times: [0.24, 0.3, 0.82, 0.9, 1],
                       ease: "circOut"
                     }}
                     className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex-col gap-2 w-full relative z-10"
@@ -254,10 +254,10 @@ export default function Contact() {
               {!isSuccess ? (
                 <motion.div
                   key="form"
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0, x: -15 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.8 }}
                 >
                   {/* Progress Indicator */}
                   <div className="flex gap-2 mb-8">
@@ -270,7 +270,7 @@ export default function Contact() {
                     
                     {/* Step 1 */}
                     {step === 1 && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What&apos;s your name?</h3>
                         <input
                           type="text"
@@ -288,7 +288,7 @@ export default function Contact() {
 
                     {/* Step 2 */}
                     {step === 2 && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What type of business, {formData.name.split(' ')[0]}?</h3>
                         <div className="grid grid-cols-2 gap-3">
                           {businessTypes.map((type) => (
@@ -311,7 +311,7 @@ export default function Contact() {
 
                     {/* Step 3 */}
                     {step === 3 && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What&apos;s your biggest challenge?</h3>
                         <div className="flex flex-col gap-3">
                           {challengesList.map((challenge) => (
@@ -351,7 +351,7 @@ export default function Contact() {
 
                     {/* Step 4 */}
                     {step === 4 && (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">How can we reach you?</h3>
                         <div className="space-y-4">
                           <input
@@ -388,6 +388,7 @@ export default function Contact() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="text-center py-12 flex flex-col items-center"
                 >
                   <div className="w-20 h-20 bg-green-500/10 border border-green-500/30 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(34,197,94,0.15)]">
