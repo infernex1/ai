@@ -4,13 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
-  Dumbbell, 
-  Pizza, 
-  GraduationCap, 
-  School, 
-  ShoppingCart, 
-  Plane, 
-  Building2,
   Phone, 
   Users, 
   Clock, 
@@ -21,16 +14,6 @@ import {
   Check,
   Mail
 } from "lucide-react";
-
-const businessTypes = [
-  { name: "Gym/Fitness", icon: Dumbbell },
-  { name: "Restaurant", icon: Pizza },
-  { name: "Coaching", icon: GraduationCap },
-  { name: "School", icon: School },
-  { name: "Grocery", icon: ShoppingCart },
-  { name: "Travel", icon: Plane },
-  { name: "Other", icon: Building2 }
-];
 
 const challengesList = [
   { id: "calls", text: "Missing after-hours calls", icon: Phone },
@@ -289,22 +272,23 @@ export default function Contact() {
                     {step === 2 && (
                       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What type of business you have, {formData.name.split(' ')[0]}?</h3>
-                        <div className="grid grid-cols-2 gap-3">
-                          {businessTypes.map((type) => (
-                            <button
-                              key={type.name}
-                              type="button"
-                              onClick={() => { setFormData({ ...formData, businessType: type.name }); handleNext(); }}
-                              className={`p-4 rounded-xl border text-left flex items-center gap-3 transition-colors ${formData.businessType === type.name ? "border-accent bg-accent/5" : "border-card-border bg-primary hover:border-accent/50"}`}
-                            >
-                              <span className="text-accent shrink-0">
-                                <type.icon size={20} strokeWidth={1.5} />
-                              </span>
-                              <span className="font-medium text-text-primary text-sm">{type.name}</span>
-                            </button>
-                          ))}
+                        <input
+                          type="text"
+                          required
+                          value={formData.businessType}
+                          onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
+                          placeholder="E.g. E-commerce, Local Gym, SaaS..."
+                          className="w-full bg-primary border border-card-border rounded-xl px-4 py-4 text-text-primary outline-none focus:border-accent transition-colors text-base"
+                          autoFocus
+                        />
+                        <div className="flex gap-4">
+                          <button type="button" onClick={handleBack} className="px-6 rounded-full border border-card-border text-text-primary hover:bg-primary transition-colors font-medium">
+                            Back
+                          </button>
+                          <button type="submit" className="flex-1 h-14 rounded-full bg-accent-gradient text-white font-semibold flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(196,30,58,0.3)]">
+                            Continue <span className="text-xl">→</span>
+                          </button>
                         </div>
-                        <button type="button" onClick={handleBack} className="text-text-secondary text-sm hover:text-text-primary transition-colors mt-4 inline-block">← Back</button>
                       </motion.div>
                     )}
 
