@@ -103,7 +103,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden lg:min-h-screen flex items-center">
+    <section id="contact" className="py-24 relative overflow-hidden lg:min-h-screen lg:flex lg:items-center">
       {/* Animated Background (CSS GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-primary">
         <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] animate-orb-3" />
@@ -134,7 +134,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start lg:items-center">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
           
           {/* Left Column: Animation Showcase */}
           <div className="hidden lg:flex flex-col items-center justify-center relative min-h-[620px] w-full py-6">
