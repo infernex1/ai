@@ -103,7 +103,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden min-h-screen flex items-center">
+    <section id="contact" className="py-24 relative overflow-hidden lg:min-h-screen flex items-center">
       {/* Animated Background (CSS GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-primary">
         <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] animate-orb-3" />
@@ -137,7 +137,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           
           {/* Left Column: Animation Showcase */}
-          <div className="flex flex-col items-center justify-center relative min-h-[500px] md:min-h-[620px] w-full py-12 md:py-6">
+          <div className="hidden lg:flex flex-col items-center justify-center relative min-h-[620px] w-full py-6">
             
             {/* ANIMATION: PHONE MOCKUP */}
             <motion.div 
@@ -249,7 +249,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Multi-step Form */}
-          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-10 shadow-2xl relative">
+          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
             <AnimatePresence mode="wait">
               {!isSuccess ? (
                 <motion.div
