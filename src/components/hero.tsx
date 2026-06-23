@@ -119,8 +119,8 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-grid-pattern [mask-image:linear-gradient(180deg,white,transparent)] opacity-40"></div>
       
       {/* Animated Orbs (CSS GPU Accelerated) */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px] pointer-events-none z-0 animate-orb-1" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#FF6B6B]/10 rounded-full blur-[150px] pointer-events-none z-0 animate-orb-2" />
+      <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-accent/20 rounded-full blur-[60px] md:blur-[120px] pointer-events-none z-0 animate-orb-1" />
+      <div className="absolute bottom-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#FF6B6B]/10 rounded-full blur-[80px] md:blur-[150px] pointer-events-none z-0 animate-orb-2" />
 
       <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center text-center relative z-10 mt-10 md:mt-0">
         

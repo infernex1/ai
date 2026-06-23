@@ -106,9 +106,8 @@ export default function Contact() {
     <section id="contact" className="py-24 relative overflow-hidden lg:min-h-screen lg:flex lg:items-center">
       {/* Animated Background (CSS GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-primary">
-        <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] animate-orb-3" />
-        <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] bg-[#FF6B6B]/10 rounded-full blur-[150px] animate-orb-4" />
-        <div className="absolute inset-0 bg-primary/40 backdrop-blur-3xl"></div>
+        <div className="absolute top-[20%] left-[10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent/10 rounded-full blur-[60px] md:blur-[120px] animate-orb-3" />
+        <div className="absolute bottom-[20%] right-[10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#FF6B6B]/10 rounded-full blur-[80px] md:blur-[150px] animate-orb-4" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
