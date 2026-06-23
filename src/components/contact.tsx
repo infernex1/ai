@@ -4,13 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
-  Dumbbell, 
-  Pizza, 
-  GraduationCap, 
-  School, 
-  ShoppingCart, 
-  Plane, 
-  Building2, 
   Phone, 
   Users, 
   Clock, 
@@ -21,16 +14,6 @@ import {
   Check,
   Mail
 } from "lucide-react";
-
-const businessTypes = [
-  { name: "Gym/Fitness", icon: Dumbbell },
-  { name: "Restaurant", icon: Pizza },
-  { name: "Coaching", icon: GraduationCap },
-  { name: "School", icon: School },
-  { name: "Grocery", icon: ShoppingCart },
-  { name: "Travel", icon: Plane },
-  { name: "Other", icon: Building2 }
-];
 
 const challengesList = [
   { id: "calls", text: "Missing after-hours calls", icon: Phone },
@@ -260,12 +243,12 @@ export default function Contact() {
                 >
                   {/* Progress Indicator */}
                   <div className="flex gap-2 mb-8">
-                    {[1, 2, 3, 4].map((i) => (
+                    {[1, 2, 3].map((i) => (
                       <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${i <= step ? "bg-accent" : "bg-card-border"}`} />
                     ))}
                   </div>
 
-                  <form onSubmit={step === 4 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }}>
+                  <form onSubmit={step === 3 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }}>
                     
                     {/* Step 1 */}
                     {step === 1 && (
@@ -287,29 +270,6 @@ export default function Contact() {
 
                     {/* Step 2 */}
                     {step === 2 && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
-                        <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What type of business, {formData.name.split(' ')[0]}?</h3>
-                        <div className="grid grid-cols-2 gap-3">
-                          {businessTypes.map((type) => (
-                            <button
-                              key={type.name}
-                              type="button"
-                              onClick={() => { setFormData({ ...formData, businessType: type.name }); handleNext(); }}
-                              className={`p-4 rounded-xl border text-left flex items-center gap-3 transition-colors ${formData.businessType === type.name ? "border-accent bg-accent/5" : "border-card-border bg-primary hover:border-accent/50"}`}
-                            >
-                              <span className="text-accent shrink-0">
-                                <type.icon size={20} strokeWidth={1.5} />
-                              </span>
-                              <span className="font-medium text-text-primary text-sm">{type.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                        <button type="button" onClick={handleBack} className="text-text-secondary text-sm hover:text-text-primary transition-colors mt-4 inline-block">← Back</button>
-                      </motion.div>
-                    )}
-
-                    {/* Step 3 */}
-                    {step === 3 && (
                       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What&apos;s your biggest challenge?</h3>
                         <div className="flex flex-col gap-3">
@@ -348,8 +308,8 @@ export default function Contact() {
                       </motion.div>
                     )}
 
-                    {/* Step 4 */}
-                    {step === 4 && (
+                    {/* Step 3 */}
+                    {step === 3 && (
                       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
                         <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">How can we reach you?</h3>
                         <div className="space-y-4">
