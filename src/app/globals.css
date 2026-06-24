@@ -345,39 +345,14 @@ html, body {
 }
 
 /* Scroll-Driven progress lines for process.tsx */
-@keyframes grow-line-x {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-@keyframes grow-line-y {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
-
 .progress-line-horizontal-inner {
-  transform: scaleX(1);
-}
-@supports (animation-timeline: view()) {
-  .progress-line-horizontal-inner {
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: grow-line-x linear both;
-    animation-timeline: view();
-    animation-range: entry 10% exit 90%;
-  }
+  transform-origin: left;
+  will-change: transform;
 }
 
 .progress-line-vertical-inner {
-  transform: scaleY(1);
-}
-@supports (animation-timeline: view()) {
-  .progress-line-vertical-inner {
-    transform: scaleY(0);
-    transform-origin: top;
-    animation: grow-line-y linear both;
-    animation-timeline: view();
-    animation-range: entry 10% exit 90%;
-  }
+  transform-origin: top;
+  will-change: transform;
 }
 
 /* Hero Entrance Animations - CSS keyframes */

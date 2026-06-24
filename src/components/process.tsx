@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Phone, Settings, Rocket } from "lucide-react";
 
 const steps = [
@@ -41,6 +41,44 @@ export default function Process() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { margin: "-10%" });
 
+  useEffect(() => {
+    if (!isInView || typeof window === "undefined") return;
+
+    let animFrameId: number;
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Calculate progress from when top of section enters center of viewport,
+      // to when bottom of section reaches center of viewport.
+      const start = rect.top - viewportHeight / 2;
+      const end = rect.bottom - viewportHeight / 2;
+      const total = end - start;
+
+      // Calculate progress between 0 and 1
+      let progress = 0;
+      if (start < 0) {
+        progress = Math.min(Math.max(-start / total, 0), 1);
+      }
+
+      // Update the CSS custom property on the section container directly (no React state updates!)
+      section.style.setProperty("--scroll-progress", progress.toString());
+
+      animFrameId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(animFrameId);
+    };
+  }, [isInView]);
+
   return (
     <section 
       ref={sectionRef}
@@ -48,6 +86,7 @@ export default function Process() {
       className={`py-24 bg-secondary relative overflow-hidden ${
         isInView ? "section-in-view" : ""
       }`}
+      style={{ "--scroll-progress": "0" } as React.CSSProperties}
     >
       <div className="max-w-7xl mx-auto px-6">
         
@@ -70,12 +109,18 @@ export default function Process() {
           
           {/* Animated Line (Desktop - Horizontal) */}
           <div className="hidden md:block absolute top-[44px] left-[10%] right-[10%] h-1 bg-card-border rounded-full overflow-hidden">
-            <div className="absolute top-0 bottom-0 left-0 bg-accent progress-line-horizontal-inner w-full" />
+            <div 
+              className="absolute top-0 bottom-0 left-0 bg-accent progress-line-horizontal-inner w-full" 
+              style={{ transform: "scaleX(var(--scroll-progress, 0))" }}
+            />
           </div>
 
           {/* Animated Line (Mobile - Vertical) */}
           <div className="md:hidden absolute top-10 bottom-10 left-[44px] w-1 bg-card-border rounded-full overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 bg-accent progress-line-vertical-inner h-full" />
+            <div 
+              className="absolute top-0 left-0 right-0 bg-accent progress-line-vertical-inner h-full" 
+              style={{ transform: "scaleY(var(--scroll-progress, 0))" }}
+            />
           </div>
 
           <motion.div 
