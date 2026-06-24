@@ -49,18 +49,15 @@ const RestaurantAnimation = () => (
       {/* Windows */}
       <rect x="115" y="160" width="50" height="40" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-60 dark:opacity-40" />
       <rect x="235" y="160" width="50" height="40" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-60 dark:opacity-40" />
-      {/* Signboard */}
-      <rect x="160" y="60" width="80" height="25" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-90 dark:opacity-70" />
-      
-      {/* AI Nodes around storefront */}
-      <path d="M 160 60 L 120 40 M 240 60 L 280 40 M 100 230 L 50 230 M 300 230 L 350 230" stroke="#C41E3A" strokeWidth="2" strokeDasharray="4 4" fill="none" className="opacity-40 dark:opacity-20" />
+
+      {/* Network pulsing dots around storefront */}
       {[
-        {cx:160, cy:60}, {cx:240, cy:60}, {cx:115, cy:160}, {cx:285, cy:160}, {cx:120, cy:40}, {cx:280, cy:40}, {cx:100, cy:230}, {cx:300, cy:230}
+        {cx:100, cy:80}, {cx:300, cy:80}, {cx:85, cy:140}, {cx:315, cy:140}, {cx:140, cy:180}, {cx:260, cy:180}, {cx:200, cy:120}, {cx:200, cy:200}
       ].map((n, i) => (
-        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-80 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-85 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.15}s` }} />
       ))}
-      <circle r="4" fill="#fff">
-        <animateMotion dur="3s" repeatCount="indefinite" path="M 120 40 L 160 60 L 240 60 L 280 40" />
+      <circle r="3.5" fill="#fff">
+        <animateMotion dur="3s" repeatCount="indefinite" path="M 100 80 L 300 80 L 315 140 L 85 140 Z" />
       </circle>
     </svg>
   </div>
@@ -69,22 +66,23 @@ const RestaurantAnimation = () => (
 const CoachingAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      {/* Graduation Cap */}
-      <path d="M 200 100 L 120 140 L 200 180 L 280 140 Z" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" />
-      <path d="M 140 150 L 140 200 Q 200 230 260 200 L 260 150" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-60 dark:opacity-40" />
-      <path d="M 280 140 L 300 160 L 300 200" stroke="#C41E3A" strokeWidth="2" fill="none" className="opacity-70 dark:opacity-50" />
-      <circle cx="300" cy="205" r="5" fill="#C41E3A" className="opacity-80 dark:opacity-60" />
+      {/* Target/Bullseye for coaching goals */}
+      <circle cx="200" cy="150" r="70" fill="none" stroke="#C41E3A" strokeWidth="4" className="opacity-80 dark:opacity-60" />
+      <circle cx="200" cy="150" r="45" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-70 dark:opacity-50" />
+      <circle cx="200" cy="150" r="20" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-80 dark:opacity-60" />
       
-      {/* Network Connections */}
-      <path d="M 200 100 L 200 40 M 120 140 L 60 140 M 200 215 L 200 270" stroke="#C41E3A" strokeWidth="2" strokeDasharray="4 4" fill="none" className="opacity-40 dark:opacity-20" />
+      {/* Arrow hitting bullseye */}
+      <line x1="80" y1="50" x2="190" y2="140" stroke="#C41E3A" strokeWidth="5" strokeLinecap="round" className="opacity-95" />
+      <polygon points="194,144 178,142 190,130" fill="#C41E3A" className="opacity-95" />
       
+      {/* Pulsing highlights */}
       {[
-        {cx:200, cy:100}, {cx:120, cy:140}, {cx:200, cy:180}, {cx:280, cy:140}, {cx:200, cy:40}, {cx:60, cy:140}, {cx:200, cy:270}
+        {cx:200, cy:80}, {cx:200, cy:220}, {cx:130, cy:150}, {cx:270, cy:150}, {cx:200, cy:150}, {cx:80, cy:50}, {cx:140, cy:100}
       ].map((n, i) => (
-        <circle key={i} cx={n.cx} cy={n.cy} r="5" fill="#C41E3A" className="opacity-100 dark:opacity-80 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-85 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.25}s` }} />
       ))}
-      <circle r="4" fill="#fff">
-        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 100 L 120 140 L 200 180 L 280 140 Z" />
+      <circle r="3" fill="#fff">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M 80 50 L 190 140" />
       </circle>
     </svg>
   </div>
@@ -93,35 +91,23 @@ const CoachingAnimation = () => (
 const SchoolsAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      {/* Student Head */}
-      <circle cx="200" cy="80" r="25" fill="none" stroke="#C41E3A" strokeWidth="4" className="opacity-80 dark:opacity-60" />
-      {/* Student Body */}
-      <path d="M 170 200 L 175 115 Q 200 130 225 115 L 230 200 Z" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-70 dark:opacity-50" />
-      {/* Legs */}
-      <path d="M 185 200 L 185 260 M 215 200 L 215 260" stroke="#C41E3A" strokeWidth="4" className="opacity-70 dark:opacity-50" />
-      {/* Arms holding books */}
-      <path d="M 175 120 Q 140 140 160 170 L 175 160" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" />
-      <path d="M 225 120 Q 260 140 240 170 L 225 160" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" />
-      {/* Backpack straps */}
-      <path d="M 175 115 L 175 180 M 225 115 L 225 180" stroke="#C41E3A" strokeWidth="2" strokeDasharray="4 4" fill="none" className="opacity-50" />
-      
-      {/* Stack of Books */}
-      <g transform="translate(198, 155) rotate(-15)">
-        <rect x="-35" y="-15" width="55" height="12" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-90 dark:opacity-70" />
-        <rect x="-35" y="-3" width="50" height="12" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-90 dark:opacity-70" />
-        <rect x="-35" y="9" width="60" height="12" rx="2" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-90 dark:opacity-70" />
-      </g>
-      
-      {/* AI Knowledge paths radiating */}
-      <path d="M 200 55 L 200 20 M 175 60 L 140 30 M 225 60 L 260 30" stroke="#C41E3A" strokeWidth="2" strokeDasharray="4 4" fill="none" className="opacity-40 dark:opacity-20" />
-      
+      {/* School House Outline */}
+      <path d="M 120 230 L 120 130 L 200 70 L 280 130 L 280 230 Z" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-70 dark:opacity-50" />
+      <rect x="180" y="160" width="40" height="70" fill="none" stroke="#C41E3A" strokeWidth="2.5" className="opacity-60 dark:opacity-40" />
+      <circle cx="210" cy="195" r="3" fill="#C41E3A" className="opacity-90" />
+      {/* Roof Clock */}
+      <circle cx="200" cy="115" r="16" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-70 dark:opacity-50" />
+      <line x1="200" y1="115" x2="200" y2="106" stroke="#C41E3A" strokeWidth="2" className="opacity-80" />
+      <line x1="200" y1="115" x2="208" y2="115" stroke="#C41E3A" strokeWidth="1.5" className="opacity-80" />
+
+      {/* Pulsing nodes representing classes/bookings */}
       {[
-        {cx:200, cy:55}, {cx:200, cy:20}, {cx:175, cy:60}, {cx:140, cy:30}, {cx:225, cy:60}, {cx:260, cy:30}, {cx:160, cy:170}, {cx:240, cy:170}
+        {cx:120, cy:130}, {cx:280, cy:130}, {cx:200, cy:70}, {cx:150, cy:180}, {cx:250, cy:180}, {cx:200, cy:115}, {cx:120, cy:230}, {cx:280, cy:230}
       ].map((n, i) => (
-        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-80 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-85 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.18}s` }} />
       ))}
       <circle r="3" fill="#fff">
-        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 140 30 L 175 60 L 200 80" />
+        <animateMotion dur="4s" repeatCount="indefinite" path="M 120 230 L 120 130 L 200 70 L 280 130 L 280 230 Z" />
       </circle>
     </svg>
   </div>
@@ -131,22 +117,18 @@ const GroceryAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       {/* Shopping Cart */}
-      <path d="M 80 80 L 120 80 L 150 180 L 280 180 L 310 100 L 130 100" stroke="#C41E3A" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" className="opacity-80 dark:opacity-60" />
-      <circle cx="170" cy="210" r="10" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" />
-      <circle cx="260" cy="210" r="10" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-80 dark:opacity-60" />
-      {/* Cart Grid/Lines */}
-      <path d="M 140 140 L 295 140 M 180 100 L 170 180 M 220 100 L 210 180 M 260 100 L 250 180" stroke="#C41E3A" strokeWidth="2" fill="none" className="opacity-50 dark:opacity-30" />
-      
-      {/* Scanner/AI Connection lines */}
-      <path d="M 310 100 L 350 60 M 80 80 L 50 50" stroke="#C41E3A" strokeWidth="2" strokeDasharray="4 4" fill="none" className="opacity-40 dark:opacity-20" />
-      
+      <path d="M 100 100 L 125 100 L 155 200 L 270 200 L 300 120 L 132 120" fill="none" stroke="#C41E3A" strokeWidth="4" strokeLinecap="round" className="opacity-80 dark:opacity-60" />
+      <circle cx="170" cy="225" r="12" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-80" />
+      <circle cx="255" cy="225" r="12" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-80" />
+
+      {/* Pulsing items inside and around cart */}
       {[
-        {cx:120, cy:80}, {cx:150, cy:180}, {cx:280, cy:180}, {cx:310, cy:100}, {cx:170, cy:210}, {cx:260, cy:210}, {cx:350, cy:60}, {cx:50, cy:50}
+        {cx:155, cy:120}, {cx:190, cy:120}, {cx:225, cy:120}, {cx:260, cy:120}, {cx:180, cy:160}, {cx:220, cy:160}, {cx:250, cy:160}, {cx:100, cy:100}
       ].map((n, i) => (
-        <circle key={i} cx={n.cx} cy={n.cy} r="5" fill="#C41E3A" className="opacity-100 dark:opacity-80 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-85 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.12}s` }} />
       ))}
-      <circle r="4" fill="#fff">
-        <animateMotion dur="3s" repeatCount="indefinite" path="M 120 80 L 150 180 L 280 180 L 310 100" />
+      <circle r="3" fill="#fff">
+        <animateMotion dur="2s" repeatCount="indefinite" path="M 300 120 L 132 120" />
       </circle>
     </svg>
   </div>
@@ -155,44 +137,20 @@ const GroceryAnimation = () => (
 const TravelAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      {/* Passenger Aeroplane */}
-      <g transform="translate(40, -20) rotate(15, 200, 150)">
-        {/* Fuselage (Body) */}
-        <path d="M 60 150 Q 40 150 40 140 Q 40 130 60 130 L 280 130 Q 340 130 350 140 Q 340 150 280 150 Z" fill="none" stroke="#C41E3A" strokeWidth="4" className="opacity-80 dark:opacity-60" />
-        {/* Tail */}
-        <path d="M 60 130 L 40 70 L 90 70 L 110 130" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-80 dark:opacity-60" />
-        <path d="M 50 140 L 20 140 L 30 150 Z" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-60 dark:opacity-40" />
-        {/* Main Wings */}
-        <path d="M 190 150 L 140 230 L 190 230 L 230 150" fill="none" stroke="#C41E3A" strokeWidth="3" strokeLinejoin="round" className="opacity-80 dark:opacity-60" />
-        <path d="M 210 130 L 170 80 L 220 80 L 250 130" fill="none" stroke="#C41E3A" strokeWidth="2" strokeLinejoin="round" className="opacity-60 dark:opacity-40" />
-        {/* Engines */}
-        <rect x="160" y="155" width="30" height="12" rx="4" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-70 dark:opacity-50" />
-        <rect x="190" y="115" width="25" height="10" rx="3" fill="none" stroke="#C41E3A" strokeWidth="2" className="opacity-70 dark:opacity-50" />
-        {/* Passenger Windows */}
-        <g stroke="#C41E3A" strokeWidth="2" fill="none" className="opacity-90 dark:opacity-70">
-          <circle cx="120" cy="140" r="2.5" />
-          <circle cx="140" cy="140" r="2.5" />
-          <circle cx="160" cy="140" r="2.5" />
-          <circle cx="180" cy="140" r="2.5" />
-          <circle cx="200" cy="140" r="2.5" />
-          <circle cx="220" cy="140" r="2.5" />
-          <circle cx="240" cy="140" r="2.5" />
-          <circle cx="260" cy="140" r="2.5" />
-          {/* Cockpit Window */}
-          <path d="M 310 135 L 325 135 L 325 145 L 310 145 Z" />
-        </g>
-      </g>
+      {/* Aeroplane Shape */}
+      <path d="M 80 180 Q 200 100 320 60 Q 300 140 280 200 L 260 200 L 220 150 L 150 170 L 140 200 L 120 200 L 115 175 L 85 185 Z" fill="none" stroke="#C41E3A" strokeWidth="3" className="opacity-80 dark:opacity-60" />
       
-      {/* Flight Path / AI Data Streams */}
-      <path d="M 20 280 Q 150 250 380 40" stroke="#C41E3A" strokeWidth="2" strokeDasharray="8 8" fill="none" className="opacity-40 dark:opacity-20" />
-      
+      {/* Flight Path */}
+      <path d="M 50 250 Q 150 190 350 50" fill="none" stroke="rgba(196,30,58,0.25)" strokeWidth="2.5" strokeDasharray="6 6" />
+
+      {/* Staggered pulsing nodes */}
       {[
-        {cx:20, cy:280}, {cx:150, cy:250}, {cx:380, cy:40}
+        {cx:80, cy:180}, {cx:150, cy:170}, {cx:220, cy:150}, {cx:320, cy:60}, {cx:280, cy:200}, {cx:150, cy:215}, {cx:250, cy:120}
       ].map((n, i) => (
-        <circle key={i} cx={n.cx} cy={n.cy} r="5" fill="#C41E3A" className="opacity-100 dark:opacity-80 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+        <circle key={i} cx={n.cx} cy={n.cy} r="4" fill="#C41E3A" className="opacity-100 dark:opacity-85 animate-svg-scale-pulse" style={{ animationDelay: `${i * 0.22}s` }} />
       ))}
-      <circle r="4" fill="#fff">
-        <animateMotion dur="3s" repeatCount="indefinite" path="M 20 280 Q 150 250 380 40" />
+      <circle r="3.5" fill="#fff">
+        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 50 250 Q 150 190 350 50" />
       </circle>
     </svg>
   </div>
@@ -203,39 +161,90 @@ const industries = [
     title: "Gyms & Fitness",
     icon: Dumbbell,
     badge: "AVAILABLE NOW",
-    features: ["AI Voice Receptionist 24/7", "Automated Trial Booking", "Member Renewal Reminders"],
+    features: [
+      "AI answers missed member calls",
+      "Books gym tours automatically",
+      "Responds to membership pricing queries",
+      "Saves leads straight to gym dashboard",
+      "Stops lost membership sales 24/7"
+    ]
   },
   {
     title: "Restaurants",
     icon: Pizza,
-    badge: "COMING SOON",
-    features: ["AI Reservation Booking", "Order Inquiry Handling", "Promotional Campaigns"],
+    badge: "AVAILABLE NOW",
+    features: [
+      "AI takes food orders over phone",
+      "Handles table bookings & timings",
+      "Integrates with POS systems",
+      "Answers menu & ingredient FAQs",
+      "Sends SMS confirmation to clients"
+    ]
   },
   {
     title: "Coaching",
     icon: GraduationCap,
-    badge: "COMING SOON",
-    features: ["AI Admission Assistant", "Demo Class Booking", "Student CRM"],
+    badge: "AVAILABLE NOW",
+    features: [
+      "Qualifies incoming student leads",
+      "Books discovery calls on Calendar",
+      "Automates client onboarding forms",
+      "Handles billing & program queries",
+      "Sends SMS reminders for sessions"
+    ]
   },
   {
     title: "Schools",
     icon: School,
     badge: "COMING SOON",
-    features: ["Enquiry Handling AI", "Admission Automation", "Parent Communication"],
+    features: [
+      "Answers admission & timing FAQs",
+      "Screens parent inquiry phone calls",
+      "Books campus visits & meetings",
+      "Sends automated text alerts to parents",
+      "CRM dashboard for admin staff"
+    ]
   },
   {
     title: "Grocery",
     icon: ShoppingCart,
     badge: "COMING SOON",
-    features: ["Order Management AI", "Delivery Updates", "Customer Support"],
+    features: [
+      "Takes stock availability inquiries",
+      "Handles order-ahead collections",
+      "Integrates with inventory systems",
+      "Updates delivery schedules",
+      "Drives automated customer loyalty"
+    ]
   },
   {
     title: "Travel",
     icon: Plane,
     badge: "COMING SOON",
-    features: ["AI Travel Consultant", "Booking Automation", "Customer Support"],
-  },
+    features: [
+      "Screens package & pricing questions",
+      "Books flight & hotel consults",
+      "Answers booking modification FAQs",
+      "Captures target destinations",
+      "Staggered email & SMS follow-ups"
+    ]
+  }
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
 
 export default function Industries() {
   return (
@@ -257,8 +266,14 @@ export default function Industries() {
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {industries.map((item, index) => {
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {industries.map((item) => {
             const AnimationComponent = 
               item.title === "Gyms & Fitness" ? GymAnimation :
               item.title === "Restaurants" ? RestaurantAnimation :
@@ -270,17 +285,14 @@ export default function Industries() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[16px] p-[28px] hover:translate-y-[-4px] hover:border-[#C41E3A] hover:shadow-[0_0_20px_rgba(196,30,58,0.15)] transition-all duration-300 relative overflow-hidden flex flex-col h-full min-h-[280px]"
+                variants={itemVariants}
+                className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.06)] rounded-[16px] p-[28px] hover:translate-y-[-4px] hover:border-[#C41E3A] hover:shadow-[0_0_20px_rgba(196,30,58,0.15)] transition-[transform,border-color,box-shadow] duration-300 relative overflow-hidden flex flex-col h-full min-h-[280px]"
               >
                 {/* AI Animation Layer (BOTTOM) */}
                 {AnimationComponent && <AnimationComponent />}
                 
                 {/* Theme-aware Readability Layer (MIDDLE) */}
-                <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/35 backdrop-blur-[2px]" />
+                <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/35" />
 
                 {/* Badge */}
                 <div className="absolute top-6 right-6 z-20">
@@ -317,7 +329,7 @@ export default function Industries() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

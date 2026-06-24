@@ -107,24 +107,27 @@ html, body {
   }
 }
 
-.animate-orb-1 {
-  animation: orb-float-1 15s infinite ease-in-out;
-  will-change: transform;
-}
-
-.animate-orb-2 {
-  animation: orb-float-2 20s infinite ease-in-out;
-  will-change: transform;
-}
-
-.animate-orb-3 {
-  animation: orb-float-3 20s infinite ease-in-out;
-  will-change: transform;
-}
-
+.animate-orb-1,
+.animate-orb-2,
+.animate-orb-3,
 .animate-orb-4 {
+  /* Rest until parent section is in view */
+}
+
+.section-in-view .animate-orb-1 {
+  animation: orb-float-1 15s infinite ease-in-out;
+}
+
+.section-in-view .animate-orb-2 {
+  animation: orb-float-2 20s infinite ease-in-out;
+}
+
+.section-in-view .animate-orb-3 {
+  animation: orb-float-3 20s infinite ease-in-out;
+}
+
+.section-in-view .animate-orb-4 {
   animation: orb-float-4 25s infinite ease-in-out;
-  will-change: transform;
 }
 
 /* GPU-Accelerated Ticker Marquee Animation */
@@ -140,7 +143,6 @@ html, body {
 .animate-marquee {
   display: flex;
   animation: marquee 30s linear infinite;
-  will-change: transform;
 }
 
 /* ================================================================
@@ -155,10 +157,11 @@ html, body {
   50% { transform: scale(1.2); opacity: 1; }
 }
 .animate-svg-pulse-node {
-  animation: svg-pulse-node 2s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform, opacity;
+}
+.group:hover .animate-svg-pulse-node {
+  animation: svg-pulse-node 2s ease-in-out infinite;
 }
 
 /* SVG Scale Pulse — industries.tsx circles */
@@ -167,10 +170,11 @@ html, body {
   50% { transform: scale(1.4); }
 }
 .animate-svg-scale-pulse {
-  animation: svg-scale-pulse 2s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-scale-pulse {
+  animation: svg-scale-pulse 2s ease-in-out infinite;
 }
 
 /* SVG Rotate Node — services.tsx workflow squares */
@@ -182,10 +186,11 @@ html, body {
   100% { transform: rotate(360deg) scale(1); }
 }
 .animate-svg-rotate-node {
-  animation: svg-rotate-node 4s linear infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-rotate-node {
+  animation: svg-rotate-node 4s linear infinite;
 }
 
 /* SVG Wireframe Draw — services.tsx wireframe rect */
@@ -195,8 +200,9 @@ html, body {
 }
 .animate-svg-draw {
   stroke-dasharray: 1000;
+}
+.group:hover .animate-svg-draw {
   animation: svg-draw 8s ease-in-out infinite;
-  will-change: stroke-dashoffset;
 }
 
 /* SVG Fade Block — services.tsx wireframe content blocks */
@@ -205,6 +211,9 @@ html, body {
   25%, 75% { opacity: 0.25; }
 }
 .animate-svg-fade-block {
+  opacity: 0;
+}
+.group:hover .animate-svg-fade-block {
   animation: svg-fade-block 8s ease-in-out infinite;
 }
 
@@ -214,10 +223,11 @@ html, body {
   50% { transform: translateY(-10px); }
 }
 .animate-svg-float-y {
-  animation: svg-float-y 4s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-float-y {
+  animation: svg-float-y 4s ease-in-out infinite;
 }
 
 /* SVG Float XY — services.tsx app ecosystem peripheral devices */
@@ -238,28 +248,32 @@ html, body {
   50% { transform: translate(5px, 6px); }
 }
 .animate-svg-float-up-left {
-  animation: svg-float-xy-up-left 5s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-float-up-left {
+  animation: svg-float-xy-up-left 5s ease-in-out infinite;
 }
 .animate-svg-float-up-right {
-  animation: svg-float-xy-up-right 4.5s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-float-up-right {
+  animation: svg-float-xy-up-right 4.5s ease-in-out infinite;
 }
 .animate-svg-float-down-left {
-  animation: svg-float-xy-down-left 5.5s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-float-down-left {
+  animation: svg-float-xy-down-left 5.5s ease-in-out infinite;
 }
 .animate-svg-float-down-right {
-  animation: svg-float-xy-down-right 6s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform;
+}
+.group:hover .animate-svg-float-down-right {
+  animation: svg-float-xy-down-right 6s ease-in-out infinite;
 }
 
 /* SVG Center Pulse — services.tsx app ecosystem center dot */
@@ -268,10 +282,11 @@ html, body {
   50% { transform: scale(2); opacity: 0.9; }
 }
 .animate-svg-pulse-center {
-  animation: svg-pulse-center 2s ease-in-out infinite;
   transform-box: fill-box;
   transform-origin: center;
-  will-change: transform, opacity;
+}
+.group:hover .animate-svg-pulse-center {
+  animation: svg-pulse-center 2s ease-in-out infinite;
 }
 
 /* Process Step Pulse Ring — process.tsx step circles */
@@ -280,6 +295,9 @@ html, body {
   50% { transform: scale(1.2); opacity: 0; }
 }
 .animate-pulse-ring {
+  /* Rest until parent is in view */
+}
+.section-in-view .animate-pulse-ring {
   animation: pulse-ring 2s ease-in-out infinite;
 }
 
@@ -289,8 +307,10 @@ html, body {
   50% { transform: translateY(6px); }
 }
 .animate-phone-float {
+  /* Rest until parent is in view */
+}
+.section-in-view .animate-phone-float {
   animation: phone-float 3.5s ease-in-out infinite;
-  will-change: transform;
 }
 
 /* Contact Notification Cycles — contact.tsx staggered notifications */
@@ -309,18 +329,72 @@ html, body {
   30%, 82% { transform: translateY(0); opacity: 1; }
   90%, 100% { transform: translateY(-60px); opacity: 0; }
 }
-.animate-notif-1 {
-  animation: notif-cycle-1 6s ease-out infinite;
-  will-change: transform, opacity;
-}
-.animate-notif-2 {
-  animation: notif-cycle-2 6s ease-out infinite;
-  will-change: transform, opacity;
-}
+.animate-notif-1,
+.animate-notif-2,
 .animate-notif-3 {
-  animation: notif-cycle-3 6s ease-out infinite;
-  will-change: transform, opacity;
+  /* Rest until parent is in view */
 }
+.section-in-view .animate-notif-1 {
+  animation: notif-cycle-1 6s ease-out infinite;
+}
+.section-in-view .animate-notif-2 {
+  animation: notif-cycle-2 6s ease-out infinite;
+}
+.section-in-view .animate-notif-3 {
+  animation: notif-cycle-3 6s ease-out infinite;
+}
+
+/* Scroll-Driven progress lines for process.tsx */
+@keyframes grow-line-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes grow-line-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.progress-line-horizontal-inner {
+  transform: scaleX(1);
+}
+@supports (animation-timeline: view()) {
+  .progress-line-horizontal-inner {
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: grow-line-x linear both;
+    animation-timeline: view();
+    animation-range: entry 10% exit 90%;
+  }
+}
+
+.progress-line-vertical-inner {
+  transform: scaleY(1);
+}
+@supports (animation-timeline: view()) {
+  .progress-line-vertical-inner {
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: grow-line-y linear both;
+    animation-timeline: view();
+    animation-range: entry 10% exit 90%;
+  }
+}
+
+/* Hero Entrance Animations - CSS keyframes */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 
 /* FAQ Override Custom CSS */
 .faq-container-closed {

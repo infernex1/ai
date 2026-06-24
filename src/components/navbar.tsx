@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -52,17 +51,14 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-colors duration-300 ${
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[1000] animate-fade-in-up transition-all duration-300 ${
           isScrolled
-            ? "bg-primary/85 backdrop-blur-xl border-b border-accent/10"
-            : "bg-transparent"
+            ? "bg-primary/95 border-b border-accent/10 py-2 shadow-sm"
+            : "bg-transparent py-4"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex flex-col z-[1001]">
             <span className="font-space-grotesk font-bold text-2xl tracking-tight bg-accent-gradient bg-clip-text text-transparent">
@@ -93,7 +89,7 @@ export default function Navbar() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-card-border bg-card text-text-primary hover:border-accent transition-all"
+                className="w-10 h-10 rounded-full flex items-center justify-center border border-card-border bg-card text-text-primary hover:border-accent transition-colors duration-200"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -103,7 +99,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={(e) => handleAnchorClick(e, "#contact")}
-              className="hidden md:flex h-10 items-center justify-center px-6 rounded-full bg-accent-gradient text-white text-sm font-semibold shadow-[0_0_15px_rgba(196,30,58,0.3)] hover:shadow-[0_0_25px_rgba(196,30,58,0.5)] hover:scale-105 transition-all duration-300"
+              className="hidden md:flex h-10 items-center justify-center px-6 rounded-full bg-accent-gradient text-white text-sm font-semibold shadow-[0_0_15px_rgba(196,30,58,0.3)] hover:shadow-[0_0_25px_rgba(196,30,58,0.5)] hover:scale-105 transition-[transform,box-shadow] duration-300"
             >
               Book Demo
             </a>
@@ -116,50 +112,49 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 z-[999] bg-primary flex flex-col justify-center items-center gap-8"
+      <div
+        className={`fixed inset-0 z-[999] bg-primary flex flex-col justify-center items-center gap-8 transition-all duration-400 ease-in-out transform ${
+          mobileMenuOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-full pointer-events-none"
+        }`}
+      >
+        {links.map((link, i) => (
+          <div
+            key={link.name}
+            style={{ transitionDelay: mobileMenuOpen ? `${150 + i * 50}ms` : "0ms" }}
+            className={`transition-all duration-500 transform ${
+              mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
           >
-            {links.map((link, i) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-              >
-                <a
-                  href={link.href}
-                  onClick={(e) => handleAnchorClick(e, link.href)}
-                  className="text-3xl font-space-grotesk font-bold text-text-primary hover:text-accent transition-colors"
-                >
-                  {link.name}
-                </a>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + links.length * 0.1 }}
+            <a
+              href={link.href}
+              onClick={(e) => handleAnchorClick(e, link.href)}
+              className="text-3xl font-space-grotesk font-bold text-text-primary hover:text-accent transition-colors"
             >
-              <a
-                href="#contact"
-                onClick={(e) => handleAnchorClick(e, "#contact")}
-                className="mt-4 flex h-14 items-center justify-center px-8 rounded-full bg-accent-gradient text-white text-lg font-semibold shadow-[0_0_15px_rgba(196,30,58,0.3)]"
-              >
-                Book Demo
-              </a>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.name}
+            </a>
+          </div>
+        ))}
+        <div
+          style={{ transitionDelay: mobileMenuOpen ? `${150 + links.length * 50}ms` : "0ms" }}
+          className={`transition-all duration-500 transform ${
+            mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          <a
+            href="#contact"
+            onClick={(e) => handleAnchorClick(e, "#contact")}
+            className="mt-4 flex h-14 items-center justify-center px-8 rounded-full bg-accent-gradient text-white text-lg font-semibold shadow-[0_0_15px_rgba(196,30,58,0.3)]"
+          >
+            Book Demo
+          </a>
+        </div>
+      </div>
     </>
   );
 }
+

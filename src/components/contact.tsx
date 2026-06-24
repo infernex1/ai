@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { 
   Phone, 
@@ -25,6 +25,9 @@ const challengesList = [
 ];
 
 export default function Contact() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-10%" });
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -86,11 +89,21 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden lg:min-h-screen lg:flex lg:items-center">
+    <section 
+      ref={sectionRef}
+      id="contact" 
+      className={`py-24 relative overflow-hidden lg:min-h-screen lg:flex lg:items-center ${
+        isInView ? "section-in-view" : ""
+      }`}
+    >
       {/* Animated Background (CSS GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-primary">
-        <div className="absolute top-[20%] left-[10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent/10 rounded-full blur-[60px] md:blur-[120px] animate-orb-3" />
-        <div className="absolute bottom-[20%] right-[10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#FF6B6B]/10 rounded-full blur-[80px] md:blur-[150px] animate-orb-4" />
+        {isInView && (
+          <>
+            <div className="absolute top-[20%] left-[10%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent/10 rounded-full blur-[40px] md:blur-[60px] animate-orb-3" />
+            <div className="absolute bottom-[20%] right-[10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#FF6B6B]/10 rounded-full blur-[50px] md:blur-[85px] animate-orb-4" />
+          </>
+        )}
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
@@ -104,7 +117,7 @@ export default function Contact() {
             </h2>
           </div>
           <div className="flex justify-center lg:justify-end shrink-0">
-            <a href="mailto:contact@infernex.in" className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-card-border hover:border-accent/50 shadow-sm hover:shadow-md transition-all group">
+            <a href="mailto:contact@infernex.in" className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-white dark:bg-[#1A1A1A] border border-card-border hover:border-accent/50 shadow-sm hover:shadow-md transition-[border-color,box-shadow] duration-300 group">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
                 <Mail size={20} strokeWidth={2} />
               </div>

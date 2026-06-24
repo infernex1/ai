@@ -34,7 +34,7 @@ export default function TermsOfService() {
       {/* Terms Content */}
       <section className="py-20 relative">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <div className="bg-card/50 border border-card-border rounded-2xl p-8 md:p-12 backdrop-blur-md space-y-10 text-text-secondary leading-relaxed">
+          <div className="bg-card border border-card-border rounded-2xl p-8 md:p-12 space-y-10 text-text-secondary leading-relaxed">
             
             <div className="space-y-4">
               <h2 className="font-space-grotesk font-bold text-2xl text-text-primary flex items-center gap-3">

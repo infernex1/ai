@@ -101,19 +101,16 @@ const WorkflowAnimation = () => (
       ].map((node, i) => (
         <rect
           key={i}
-          x={node.x - 10} y={node.y - 10} width="20" height="20" rx="4"
-          fill="none" stroke={node.color} strokeWidth="3.5"
-          className="opacity-95 dark:opacity-75 animate-svg-rotate-node"
-          style={{ transformOrigin: `${node.x}px ${node.y}px`, animationDuration: `${4 + (i % 2)}s` }}
+          x={node.x - 8}
+          y={node.y - 8}
+          width="16"
+          height="16"
+          rx="3"
+          fill={node.color}
+          className="opacity-100 dark:opacity-85 animate-svg-rotate-node"
+          style={{ animationDelay: `${i * 0.3}s` }}
         />
       ))}
-      
-      <circle r="6" fill="#C41E3A">
-        <animateMotion dur="3s" repeatCount="indefinite" path="M80 150 L160 150 L200 100 L280 100 L320 150" />
-      </circle>
-      <circle r="6" fill="#8B5CF6">
-        <animateMotion dur="3.5s" repeatCount="indefinite" path="M160 150 L200 200 L280 200 L320 150" />
-      </circle>
     </svg>
   </div>
 );
@@ -121,32 +118,31 @@ const WorkflowAnimation = () => (
 const AppEcosystemAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-
-      <path d="M200 150 L120 100" stroke="#C41E3A" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
-      <path d="M200 150 L280 100" stroke="#06B6D4" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
-      <path d="M200 150 L120 200" stroke="#06B6D4" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
-      <path d="M200 150 L280 200" stroke="#C41E3A" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
-
-      <rect
-        x="170" y="110" width="60" height="80" rx="8"
-        stroke="#C41E3A" strokeWidth="3.5" fill="none"
-        className="opacity-95 dark:opacity-80 animate-svg-float-y"
-      />
-      <rect
-        x="90" y="70" width="40" height="40" rx="4"
-        stroke="#06B6D4" strokeWidth="3" fill="none"
+      
+      <circle cx="200" cy="150" r="80" stroke="rgba(196,30,58,0.25)" strokeWidth="2" fill="none" strokeDasharray="6 6" />
+      
+      <g stroke="#C41E3A" strokeWidth="2.5" className="opacity-60 dark:opacity-40">
+        <line x1="200" y1="150" x2="120" y2="100" />
+        <line x1="200" y1="150" x2="280" y2="100" />
+        <line x1="200" y1="150" x2="140" y2="210" />
+        <line x1="200" y1="150" x2="260" y2="210" />
+      </g>
+      
+      <circle
+        cx="120" cy="100" r="14"
+        fill="#C41E3A"
         className="opacity-90 dark:opacity-75 animate-svg-float-up-left"
-        style={{ animationDelay: '0.5s' }}
+        style={{ animationDelay: '0s' }}
       />
-      <rect
-        x="270" y="70" width="30" height="50" rx="6"
-        stroke="#C41E3A" strokeWidth="3" fill="none"
+      <circle
+        cx="280" cy="100" r="14"
+        fill="#C41E3A"
         className="opacity-90 dark:opacity-75 animate-svg-float-up-right"
-        style={{ animationDelay: '1s' }}
+        style={{ animationDelay: '0.8s' }}
       />
       <rect
-        x="100" y="190" width="40" height="20" rx="4"
-        stroke="#C41E3A" strokeWidth="3" fill="none"
+        x="120" y="195" width="40" height="30" rx="4"
+        stroke="#8B5CF6" strokeWidth="3" fill="none"
         className="opacity-90 dark:opacity-75 animate-svg-float-down-left"
         style={{ animationDelay: '1.5s' }}
       />
@@ -165,17 +161,35 @@ const AppEcosystemAnimation = () => (
   </div>
 );
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 export default function Services() {
   return (
     <section id="services" className="py-24 bg-secondary relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-6"
+      >
         
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          variants={itemVariants}
           className="mb-16 text-center md:text-left"
         >
           <span className="text-[#C41E3A] font-bold tracking-[0.15em] text-sm uppercase block mb-4">OUR SERVICES</span>
@@ -189,14 +203,11 @@ export default function Services() {
           
           {/* ONE large card (full width) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="group w-full bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[40px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-all duration-500 relative overflow-hidden"
+            variants={itemVariants}
+            className="group w-full bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[40px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-[transform,border-color,box-shadow,background-color] duration-500 relative overflow-hidden"
           >
             <NeuralNetworkAnimation />
-            <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40 backdrop-blur-[2px]" />
+            <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40" />
 
             <div className="relative z-20">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
@@ -230,14 +241,11 @@ export default function Services() {
             
             {/* Card 1 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-all duration-500 relative overflow-hidden"
+              variants={itemVariants}
+              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-[transform,border-color,box-shadow,background-color] duration-500 relative overflow-hidden"
             >
               <WebsiteWireframeAnimation />
-              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40 backdrop-blur-[2px]" />
+              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40" />
 
               <div className="relative z-20">
                 <div className="flex items-center gap-3 mb-4">
@@ -254,14 +262,11 @@ export default function Services() {
 
             {/* Card 2 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-all duration-500 relative overflow-hidden"
+              variants={itemVariants}
+              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-[transform,border-color,box-shadow,background-color] duration-500 relative overflow-hidden"
             >
               <WorkflowAnimation />
-              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40 backdrop-blur-[2px]" />
+              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40" />
 
               <div className="relative z-20">
                 <div className="flex items-center gap-3 mb-4">
@@ -278,14 +283,11 @@ export default function Services() {
 
             {/* Card 3 */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-all duration-500 relative overflow-hidden"
+              variants={itemVariants}
+              className="group bg-[#FFFFFF] dark:bg-[#141414] border border-[rgba(196,30,58,0.15)] rounded-[20px] p-[28px] hover:-translate-y-2 hover:border-[#C41E3A] hover:shadow-[0_0_30px_rgba(196,30,58,0.15)] hover:bg-[rgba(196,30,58,0.03)] dark:hover:bg-gradient-to-br dark:hover:from-white/[0.05] dark:hover:to-transparent transition-[transform,border-color,box-shadow,background-color] duration-500 relative overflow-hidden"
             >
               <AppEcosystemAnimation />
-              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40 backdrop-blur-[2px]" />
+              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-white/25 dark:bg-black/40" />
 
               <div className="relative z-20">
                 <div className="flex items-center gap-3 mb-4">
@@ -302,7 +304,7 @@ export default function Services() {
 
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

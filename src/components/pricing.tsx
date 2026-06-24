@@ -93,6 +93,21 @@ const customFeatures = [
   { name: "Owner AI Assistant Bot", price: 79 },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 export default function Pricing() {
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
 
@@ -117,14 +132,17 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="py-24 bg-primary relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="max-w-7xl mx-auto px-6"
+      >
         
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          variants={itemVariants}
           className="mb-16 text-center"
         >
           <span className="text-accent font-bold tracking-[0.15em] text-sm uppercase block mb-4">PRICING</span>
@@ -136,14 +154,11 @@ export default function Pricing() {
 
         {/* Pricing Cards */}
         <div className="grid lg:grid-cols-3 gap-8 mb-24">
-          {plans.map((plan, i) => (
+          {plans.map((plan) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className={`flex flex-col bg-card rounded-3xl p-8 relative transition-all duration-300 ${
+              variants={itemVariants}
+              className={`flex flex-col bg-card rounded-3xl p-8 relative transition-[border-color,box-shadow,transform] duration-300 ${
                 plan.highlighted 
                   ? "border-2 border-accent shadow-[0_0_30px_rgba(196,30,58,0.15)] lg:-translate-y-4" 
                   : "border border-card-border hover:border-accent/50"
@@ -180,7 +195,7 @@ export default function Pricing() {
 
               <Link
                 href="#contact"
-                className={`w-full flex items-center justify-center h-12 rounded-full font-semibold transition-all duration-300 ${
+                className={`w-full flex items-center justify-center h-12 rounded-full font-semibold transition-[background-color,box-shadow] duration-300 ${
                   plan.highlighted
                     ? "bg-accent-gradient text-white shadow-[0_0_15px_rgba(196,30,58,0.4)] hover:shadow-[0_0_25px_rgba(196,30,58,0.6)]"
                     : "border border-accent/50 text-text-primary hover:bg-accent/5"
@@ -194,10 +209,7 @@ export default function Pricing() {
 
         {/* Custom Calculator */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          variants={itemVariants}
           className="bg-card border border-accent rounded-3xl p-8 md:p-12 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] pointer-events-none"></div>
@@ -214,7 +226,7 @@ export default function Pricing() {
                 <button
                   key={feature.name}
                   onClick={() => toggleFeature(feature.name)}
-                  className={`flex items-center justify-between p-4 rounded-xl border text-left transition-all duration-200 ${
+                  className={`flex items-center justify-between p-4 rounded-xl border text-left transition-[border-color,background-color,box-shadow] duration-200 ${
                     isSelected 
                       ? "border-accent bg-accent/5 shadow-[0_0_10px_rgba(196,30,58,0.1)]" 
                       : "border-card-border hover:border-accent/50 bg-primary/50"
@@ -255,14 +267,14 @@ export default function Pricing() {
             
             <Link
               href={getCustomQuoteLink()}
-              className="flex items-center justify-center h-14 px-8 rounded-full bg-accent-gradient text-white text-lg font-semibold shadow-[0_0_20px_rgba(196,30,58,0.4)] hover:shadow-[0_0_30px_rgba(196,30,58,0.6)] hover:scale-105 transition-all duration-300"
+              className="flex items-center justify-center h-14 px-8 rounded-full bg-accent-gradient text-white text-lg font-semibold shadow-[0_0_20px_rgba(196,30,58,0.4)] hover:shadow-[0_0_30px_rgba(196,30,58,0.6)] hover:scale-105 transition-[transform,box-shadow] duration-300"
             >
               Get My Custom Quote →
             </Link>
           </div>
         </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

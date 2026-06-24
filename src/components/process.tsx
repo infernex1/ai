@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Phone, Settings, Rocket } from "lucide-react";
 
@@ -22,22 +22,33 @@ const steps = [
   },
 ];
 
-export default function Process() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
 
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+export default function Process() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-10%" });
 
   return (
-    <section id="process" className="py-24 bg-secondary relative overflow-hidden" ref={containerRef}>
+    <section 
+      ref={sectionRef}
+      id="process" 
+      className={`py-24 bg-secondary relative overflow-hidden ${
+        isInView ? "section-in-view" : ""
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -59,58 +70,50 @@ export default function Process() {
           
           {/* Animated Line (Desktop - Horizontal) */}
           <div className="hidden md:block absolute top-[44px] left-[10%] right-[10%] h-1 bg-card-border rounded-full overflow-hidden">
-            <motion.div 
-              className="absolute top-0 bottom-0 left-0 bg-accent origin-left"
-              style={{ scaleX, width: "100%" }}
-            />
+            <div className="absolute top-0 bottom-0 left-0 bg-accent progress-line-horizontal-inner w-full" />
           </div>
 
           {/* Animated Line (Mobile - Vertical) */}
           <div className="md:hidden absolute top-10 bottom-10 left-[44px] w-1 bg-card-border rounded-full overflow-hidden">
-            <motion.div 
-              className="absolute top-0 left-0 right-0 bg-accent origin-top"
-              style={{ scaleY: scaleX, height: "100%" }}
-            />
+            <div className="absolute top-0 left-0 right-0 bg-accent progress-line-vertical-inner h-full" />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-12 md:gap-6 relative z-10">
-            {steps.map((step, index) => (
-              <div key={step.title} className="flex-1 flex md:flex-col items-start md:items-center gap-6 md:gap-8 group">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col md:flex-row gap-12 md:gap-6 relative z-10"
+          >
+            {steps.map((step) => (
+              <motion.div 
+                key={step.title}
+                variants={itemVariants}
+                className="flex-1 flex md:flex-col items-start md:items-center gap-6 md:gap-8 group"
+              >
                 
                 {/* Icon Circle */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="w-[88px] h-[88px] shrink-0 rounded-full bg-card border-2 border-card-border flex items-center justify-center shadow-lg relative group-hover:border-accent transition-colors duration-300"
-                >
+                <div className="w-[88px] h-[88px] shrink-0 rounded-full bg-card border-2 border-card-border flex items-center justify-center shadow-lg relative group-hover:border-accent transition-colors duration-300">
                   {/* Pulsing glow based on scroll position */}
                   <div 
                     className="absolute inset-0 rounded-full border border-accent animate-pulse-ring"
                   />
                   <step.icon size={36} strokeWidth={1.5} className="text-accent" />
-                </motion.div>
+                </div>
 
                 {/* Text Content */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
-                  className="md:text-center mt-2 md:mt-0"
-                >
+                <div className="md:text-center mt-2 md:mt-0">
                   <h3 className="font-space-grotesk font-bold text-xl md:text-2xl text-text-primary mb-3">
                     {step.title}
                   </h3>
                   <p className="text-text-secondary leading-relaxed text-sm md:text-base">
                     {step.description}
                   </p>
-                </motion.div>
+                </div>
 
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </div>

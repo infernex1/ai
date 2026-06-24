@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
 import { Flame } from "lucide-react";
 
@@ -13,9 +14,38 @@ const techStack = [
   "OpenAI"
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 export default function Trust() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-10%" });
+
   return (
-    <section id="trust" className="py-24 bg-primary relative overflow-hidden border-y border-border">
+    <section 
+      ref={sectionRef}
+      id="trust" 
+      className={`py-24 bg-primary relative overflow-hidden border-y border-border ${
+        isInView ? "section-in-view" : ""
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header */}
@@ -35,20 +65,24 @@ export default function Trust() {
         {/* Part A: Powered By */}
         <div className="mb-20">
           <p className="text-center text-text-secondary text-sm mb-8 uppercase tracking-widest">Built with industry-leading tools</p>
-          <div className="flex overflow-x-auto pb-4 hide-scrollbar gap-4 md:justify-center px-4 md:px-0">
-            {techStack.map((tech, i) => (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex overflow-x-auto pb-4 hide-scrollbar gap-4 md:justify-center px-4 md:px-0"
+          >
+            {techStack.map((tech) => (
               <motion.div
                 key={tech}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="whitespace-nowrap px-6 py-3 rounded-full bg-card/50 border border-card-border backdrop-blur-sm text-text-secondary text-sm font-medium shadow-sm hover:border-accent/30 transition-colors"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="whitespace-nowrap px-6 py-3 rounded-full bg-card border border-card-border text-text-secondary text-sm font-medium shadow-sm hover:border-accent/30 transition-[transform,border-color] duration-200"
               >
                 {tech}
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Part B: Founding Partner Offer */}
@@ -73,7 +107,7 @@ export default function Trust() {
               </p>
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent-gradient text-white font-semibold shadow-[0_0_15px_rgba(196,30,58,0.4)] hover:shadow-[0_0_25px_rgba(196,30,58,0.6)] hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent-gradient text-white font-semibold shadow-[0_0_15px_rgba(196,30,58,0.4)] hover:shadow-[0_0_25px_rgba(196,30,58,0.6)] hover:scale-105 transition-[transform,box-shadow] duration-300"
               >
                 Apply For Founding Partner Spot
               </Link>
@@ -84,12 +118,15 @@ export default function Trust() {
         {/* Part C: Demo Results */}
         <div className="text-center">
           <p className="text-text-secondary text-sm mb-8 uppercase tracking-widest font-bold">DEMO SYSTEM RESULTS</p>
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid md:grid-cols-3 gap-6 mb-8"
+          >
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              variants={cardVariants}
               className="bg-card border border-card-border p-8 rounded-2xl"
             >
               <div className="font-space-grotesk text-4xl font-bold text-accent mb-2">23</div>
@@ -98,10 +135,7 @@ export default function Trust() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              variants={cardVariants}
               className="bg-card border border-card-border p-8 rounded-2xl"
             >
               <div className="font-space-grotesk text-4xl font-bold text-accent mb-2">12</div>
@@ -110,17 +144,14 @@ export default function Trust() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              variants={cardVariants}
               className="bg-card border border-card-border p-8 rounded-2xl"
             >
               <div className="font-space-grotesk text-4xl font-bold text-accent mb-2">$0</div>
               <div className="text-text-primary font-medium">Missed after-hours</div>
               <div className="text-sm text-text-secondary">all calls answered</div>
             </motion.div>
-          </div>
+          </motion.div>
           <p className="text-xs text-text-secondary opacity-60">
             Results from our internal demo system. Real client results may vary.
           </p>
