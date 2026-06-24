@@ -1,4 +1,4 @@
-"use client";
+// Server Component — no client-side interactivity needed
 
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";

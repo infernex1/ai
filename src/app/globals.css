@@ -143,6 +143,185 @@ html, body {
   will-change: transform;
 }
 
+/* ================================================================
+   PERFORMANCE-OPTIMIZED SVG & COMPONENT ANIMATIONS
+   These replace ~80+ infinite Framer Motion JS (rAF) animations
+   with GPU-composited CSS animations (zero main-thread cost).
+   ================================================================ */
+
+/* SVG Node Pulse — services.tsx neural network circles */
+@keyframes svg-pulse-node {
+  0%, 100% { transform: scale(0.8); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+.animate-svg-pulse-node {
+  animation: svg-pulse-node 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* SVG Scale Pulse — industries.tsx circles */
+@keyframes svg-scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+}
+.animate-svg-scale-pulse {
+  animation: svg-scale-pulse 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* SVG Rotate Node — services.tsx workflow squares */
+@keyframes svg-rotate-node {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.15); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.animate-svg-rotate-node {
+  animation: svg-rotate-node 4s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* SVG Wireframe Draw — services.tsx wireframe rect */
+@keyframes svg-draw {
+  0%, 100% { stroke-dashoffset: 1000; }
+  25%, 75% { stroke-dashoffset: 0; }
+}
+.animate-svg-draw {
+  stroke-dasharray: 1000;
+  animation: svg-draw 8s ease-in-out infinite;
+  will-change: stroke-dashoffset;
+}
+
+/* SVG Fade Block — services.tsx wireframe content blocks */
+@keyframes svg-fade-block {
+  0%, 100% { opacity: 0; }
+  25%, 75% { opacity: 0.25; }
+}
+.animate-svg-fade-block {
+  animation: svg-fade-block 8s ease-in-out infinite;
+}
+
+/* SVG Float Y — services.tsx app ecosystem elements */
+@keyframes svg-float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-svg-float-y {
+  animation: svg-float-y 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* SVG Float XY — services.tsx app ecosystem peripheral devices */
+@keyframes svg-float-xy-up-left {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, -8px); }
+}
+@keyframes svg-float-xy-up-right {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5px, -6px); }
+}
+@keyframes svg-float-xy-down-left {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, 8px); }
+}
+@keyframes svg-float-xy-down-right {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5px, 6px); }
+}
+.animate-svg-float-up-left {
+  animation: svg-float-xy-up-left 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+.animate-svg-float-up-right {
+  animation: svg-float-xy-up-right 4.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+.animate-svg-float-down-left {
+  animation: svg-float-xy-down-left 5.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+.animate-svg-float-down-right {
+  animation: svg-float-xy-down-right 6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* SVG Center Pulse — services.tsx app ecosystem center dot */
+@keyframes svg-pulse-center {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(2); opacity: 0.9; }
+}
+.animate-svg-pulse-center {
+  animation: svg-pulse-center 2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Process Step Pulse Ring — process.tsx step circles */
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0; }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* Contact Phone Float — contact.tsx phone mockup */
+@keyframes phone-float {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+.animate-phone-float {
+  animation: phone-float 3.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Contact Notification Cycles — contact.tsx staggered notifications */
+@keyframes notif-cycle-1 {
+  0% { transform: translateY(-60px); opacity: 0; }
+  6%, 82% { transform: translateY(0); opacity: 1; }
+  90%, 100% { transform: translateY(-60px); opacity: 0; }
+}
+@keyframes notif-cycle-2 {
+  0%, 12% { transform: translateY(-60px); opacity: 0; }
+  18%, 82% { transform: translateY(0); opacity: 1; }
+  90%, 100% { transform: translateY(-60px); opacity: 0; }
+}
+@keyframes notif-cycle-3 {
+  0%, 24% { transform: translateY(-60px); opacity: 0; }
+  30%, 82% { transform: translateY(0); opacity: 1; }
+  90%, 100% { transform: translateY(-60px); opacity: 0; }
+}
+.animate-notif-1 {
+  animation: notif-cycle-1 6s ease-out infinite;
+  will-change: transform, opacity;
+}
+.animate-notif-2 {
+  animation: notif-cycle-2 6s ease-out infinite;
+  will-change: transform, opacity;
+}
+.animate-notif-3 {
+  animation: notif-cycle-3 6s ease-out infinite;
+  will-change: transform, opacity;
+}
+
 /* FAQ Override Custom CSS */
 .faq-container-closed {
   background-color: #FFFFFF !important;

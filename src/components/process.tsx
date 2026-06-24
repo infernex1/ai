@@ -86,10 +86,8 @@ export default function Process() {
                   className="w-[88px] h-[88px] shrink-0 rounded-full bg-card border-2 border-card-border flex items-center justify-center shadow-lg relative group-hover:border-accent transition-colors duration-300"
                 >
                   {/* Pulsing glow based on scroll position */}
-                  <motion.div 
-                    className="absolute inset-0 rounded-full border border-accent"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                  <div 
+                    className="absolute inset-0 rounded-full border border-accent animate-pulse-ring"
                   />
                   <step.icon size={36} strokeWidth={1.5} className="text-accent" />
                 </motion.div>

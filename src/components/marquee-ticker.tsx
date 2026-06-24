@@ -1,4 +1,4 @@
-"use client";
+// Server Component — animation is CSS-only (animate-marquee class)
 
 const marqueeItems = [
   "AI Voice Agents",

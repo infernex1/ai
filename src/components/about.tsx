@@ -76,7 +76,7 @@ export default function About() {
               whileHover={{ y: -10, scale: 1.05, boxShadow: "0px 15px 30px rgba(196, 30, 58, 0.18)" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 12, delay: 0.2 }}
-              className="bg-card/50 backdrop-blur-md border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className="bg-card border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
             >
               {/* Premium Glow Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
@@ -94,7 +94,7 @@ export default function About() {
               whileHover={{ y: -10, scale: 1.05, boxShadow: "0px 15px 30px rgba(196, 30, 58, 0.18)" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 12, delay: 0.3 }}
-              className="bg-card/50 backdrop-blur-md border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className="bg-card border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
             >
               {/* Premium Glow Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
@@ -112,7 +112,7 @@ export default function About() {
               whileHover={{ y: -10, scale: 1.05, boxShadow: "0px 15px 30px rgba(196, 30, 58, 0.18)" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 12, delay: 0.4 }}
-              className="bg-card/50 backdrop-blur-md border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className="bg-card border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
             >
               {/* Premium Glow Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
@@ -130,7 +130,7 @@ export default function About() {
               whileHover={{ y: -10, scale: 1.05, boxShadow: "0px 15px 30px rgba(196, 30, 58, 0.18)" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 80, damping: 12, delay: 0.5 }}
-              className="bg-card/50 backdrop-blur-md border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
+              className="bg-card border border-card-border p-6 rounded-2xl hover:border-accent transition-all duration-300 group relative overflow-hidden"
             >
               {/* Premium Glow Overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />

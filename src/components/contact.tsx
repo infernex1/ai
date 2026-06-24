@@ -129,10 +129,8 @@ export default function Contact() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative z-10"
             >
-              <motion.div
-                animate={{ y: [-6, 6, -6] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-[240px] md:w-[260px] h-[420px] bg-[#F5F5F5] dark:bg-[#0F0F0F] border-[6px] border-[#E0E0E0] dark:border-[#2A2A2A] rounded-[40px] shadow-[0_25px_80px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
+              <div
+                className="relative w-[240px] md:w-[260px] h-[420px] bg-[#F5F5F5] dark:bg-[#0F0F0F] border-[6px] border-[#E0E0E0] dark:border-[#2A2A2A] rounded-[40px] shadow-[0_25px_80px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_80px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col animate-phone-float"
               >
                 {/* Subtle reflection gradient */}
                 <div className="absolute top-0 right-0 w-[150%] h-32 bg-gradient-to-br from-white/30 to-transparent rotate-45 transform origin-top-right mix-blend-overlay pointer-events-none" />
@@ -153,18 +151,8 @@ export default function Contact() {
                 {/* Notifications inside phone */}
                 <div className="p-4 flex-1 relative overflow-hidden flex flex-col">
                   {/* 1. New Lead */}
-                  <motion.div
-                    animate={{
-                      y: [-60, 0, 0, 0, -60],
-                      opacity: [0, 1, 1, 1, 0]
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      times: [0, 0.06, 0.82, 0.9, 1],
-                      ease: "circOut"
-                    }}
-                    className="bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex gap-3 items-start w-full relative z-30"
+                  <div
+                    className="bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex gap-3 items-start w-full relative z-30 animate-notif-1"
                   >
                     <div className="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-500 shrink-0 mt-0.5">
                       <Smartphone size={14} strokeWidth={2} />
@@ -173,21 +161,11 @@ export default function Contact() {
                       <div className="font-bold text-[14px] leading-tight mb-1">New Lead!</div>
                       <div className="text-[13px] text-text-secondary leading-snug">John wants to book a trial</div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* 2. Inbox Notification */}
-                  <motion.div
-                    animate={{
-                      y: [-60, 0, 0, 0, -60],
-                      opacity: [0, 1, 1, 1, 0]
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      times: [0.12, 0.18, 0.82, 0.9, 1],
-                      ease: "circOut"
-                    }}
-                    className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg gap-3 items-start w-full relative z-20"
+                  <div
+                    className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg gap-3 items-start w-full relative z-20 animate-notif-2"
                   >
                     <div className="w-8 h-8 rounded-xl bg-[#EA4335]/10 flex items-center justify-center shrink-0">
                       <span className="text-[#EA4335] font-bold text-base leading-none">M</span>
@@ -199,21 +177,11 @@ export default function Contact() {
                       <div className="font-bold text-[12px] mb-0.5">Lead — John</div>
                       <div className="text-[11px] text-text-secondary">AI captured lead at 9:47 PM</div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* 3. Dashboard Card */}
-                  <motion.div
-                    animate={{
-                      y: [-60, 0, 0, 0, -60],
-                      opacity: [0, 1, 1, 1, 0]
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      times: [0.24, 0.3, 0.82, 0.9, 1],
-                      ease: "circOut"
-                    }}
-                    className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex-col gap-2 w-full relative z-10"
+                  <div
+                    className="flex mt-3 bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-white border border-[rgba(0,0,0,0.06)] dark:border-white/10 rounded-[16px] p-3 shadow-lg flex-col gap-2 w-full relative z-10 animate-notif-3"
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-[12px] font-bold text-[#C41E3A]">Recent Activity</span>
@@ -224,9 +192,9 @@ export default function Contact() {
                         <Check size={10} strokeWidth={3} /> SMS Sent
                       </span>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
 

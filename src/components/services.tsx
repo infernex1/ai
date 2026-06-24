@@ -6,12 +6,6 @@ import { Bot, Laptop, Zap, Smartphone } from "lucide-react";
 const NeuralNetworkAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="glow-ai" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
       
       <path d="M60 150 L140 100 L220 180 L320 120" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-90 dark:opacity-60" />
       <path d="M140 100 L200 40 L320 120" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-90 dark:opacity-60" />
@@ -28,23 +22,21 @@ const NeuralNetworkAnimation = () => (
         { cx: 120, cy: 230 },
         { cx: 300, cy: 240 },
       ].map((node, i) => (
-        <motion.circle
+        <circle
           key={i}
           cx={node.cx}
           cy={node.cy}
           r="5"
           fill="#C41E3A"
-          filter="url(#glow-ai)"
-          className="opacity-100 dark:opacity-85"
-          animate={{ opacity: [0.8, 1, 0.8], r: [4, 6, 4] }}
-          transition={{ duration: 2 + (i % 3), repeat: Infinity, ease: "easeInOut" }}
+          className="opacity-100 dark:opacity-85 animate-svg-pulse-node"
+          style={{ animationDuration: `${2 + (i % 3)}s` }}
         />
       ))}
 
-      <circle r="4.5" fill="#fff" filter="url(#glow-ai)">
+      <circle r="4.5" fill="#fff">
         <animateMotion dur="4s" repeatCount="indefinite" path="M60 150 L140 100 L220 180 L320 120" />
       </circle>
-      <circle r="4.5" fill="#fff" filter="url(#glow-ai)">
+      <circle r="4.5" fill="#fff">
         <animateMotion dur="5s" repeatCount="indefinite" path="M60 150 L120 230 L220 180 L300 240" />
       </circle>
     </svg>
@@ -54,43 +46,31 @@ const NeuralNetworkAnimation = () => (
 const WebsiteWireframeAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="glow-wireframe" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
-      <motion.rect
+      <rect
         x="50" y="40" width="300" height="220" rx="8"
         stroke="#C41E3A" strokeWidth="3" fill="none"
-        filter="url(#glow-wireframe)"
-        className="opacity-90 dark:opacity-65"
-        initial={{ strokeDasharray: "1000", strokeDashoffset: "1000" }}
-        animate={{ strokeDashoffset: ["1000", "0", "0", "1000"] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="opacity-90 dark:opacity-65 animate-svg-draw"
+        strokeDasharray="1000"
       />
       <line x1="50" y1="65" x2="350" y2="65" stroke="#C41E3A" strokeWidth="2.5" className="opacity-80 dark:opacity-50" />
       <circle cx="65" cy="52.5" r="4.5" fill="#C41E3A" className="opacity-95 dark:opacity-70" />
       <circle cx="75" cy="52.5" r="4.5" fill="#C41E3A" className="opacity-95 dark:opacity-70" />
       <circle cx="85" cy="52.5" r="4.5" fill="#C41E3A" className="opacity-95 dark:opacity-70" />
       
-      <motion.rect
+      <rect
         x="70" y="85" width="260" height="60" rx="4"
-        fill="#3B82F6" className="opacity-35 dark:opacity-20"
-        animate={{ opacity: [0, 0.25, 0.25, 0] }}
-        transition={{ duration: 8, times: [0, 0.2, 0.8, 1], repeat: Infinity }}
+        fill="#3B82F6" className="opacity-35 dark:opacity-20 animate-svg-fade-block"
+        style={{ animationDelay: '0s' }}
       />
-      <motion.rect
+      <rect
         x="70" y="160" width="120" height="80" rx="4"
-        fill="#C41E3A" className="opacity-30 dark:opacity-15"
-        animate={{ opacity: [0, 0.2, 0.2, 0] }}
-        transition={{ duration: 8, times: [0, 0.3, 0.8, 1], repeat: Infinity }}
+        fill="#C41E3A" className="opacity-30 dark:opacity-15 animate-svg-fade-block"
+        style={{ animationDelay: '1s' }}
       />
-      <motion.rect
+      <rect
         x="210" y="160" width="120" height="80" rx="4"
-        fill="#C41E3A" className="opacity-30 dark:opacity-15"
-        animate={{ opacity: [0, 0.2, 0.2, 0] }}
-        transition={{ duration: 8, times: [0, 0.4, 0.8, 1], repeat: Infinity }}
+        fill="#C41E3A" className="opacity-30 dark:opacity-15 animate-svg-fade-block"
+        style={{ animationDelay: '2s' }}
       />
       
       <g stroke="#3B82F6" strokeWidth="2.5" className="opacity-50 dark:opacity-25">
@@ -104,12 +84,6 @@ const WebsiteWireframeAnimation = () => (
 const WorkflowAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="glow-workflow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
 
       <path d="M80 150 L160 150 L200 100 L280 100" stroke="#C41E3A" strokeWidth="3" fill="none" className="opacity-90 dark:opacity-60" strokeDasharray="4 4" />
       <path d="M160 150 L200 200 L280 200" stroke="#8B5CF6" strokeWidth="3" fill="none" className="opacity-90 dark:opacity-60" strokeDasharray="4 4" />
@@ -125,21 +99,19 @@ const WorkflowAnimation = () => (
         { x: 280, y: 200, color: "#C41E3A" },
         { x: 320, y: 150, color: "#8B5CF6" },
       ].map((node, i) => (
-        <motion.rect
+        <rect
           key={i}
           x={node.x - 10} y={node.y - 10} width="20" height="20" rx="4"
           fill="none" stroke={node.color} strokeWidth="3.5"
-          filter="url(#glow-workflow)"
-          className="opacity-95 dark:opacity-75"
-          animate={{ rotate: [0, 90, 180, 270, 360], scale: [1, 1.15, 1] }}
-          transition={{ duration: 4 + (i % 2), repeat: Infinity, ease: "linear" }}
+          className="opacity-95 dark:opacity-75 animate-svg-rotate-node"
+          style={{ transformOrigin: `${node.x}px ${node.y}px`, animationDuration: `${4 + (i % 2)}s` }}
         />
       ))}
       
-      <circle r="6" fill="#C41E3A" filter="url(#glow-workflow)">
+      <circle r="6" fill="#C41E3A">
         <animateMotion dur="3s" repeatCount="indefinite" path="M80 150 L160 150 L200 100 L280 100 L320 150" />
       </circle>
-      <circle r="6" fill="#8B5CF6" filter="url(#glow-workflow)">
+      <circle r="6" fill="#8B5CF6">
         <animateMotion dur="3.5s" repeatCount="indefinite" path="M160 150 L200 200 L280 200 L320 150" />
       </circle>
     </svg>
@@ -149,63 +121,45 @@ const WorkflowAnimation = () => (
 const AppEcosystemAnimation = () => (
   <div className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-[0.45] dark:group-hover:opacity-[0.32] transition-opacity duration-500 overflow-hidden">
     <svg className="w-full h-full" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="glow-app" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
 
       <path d="M200 150 L120 100" stroke="#C41E3A" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
       <path d="M200 150 L280 100" stroke="#06B6D4" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
       <path d="M200 150 L120 200" stroke="#06B6D4" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
       <path d="M200 150 L280 200" stroke="#C41E3A" strokeWidth="2.5" fill="none" className="opacity-90 dark:opacity-60" />
 
-      <motion.rect
+      <rect
         x="170" y="110" width="60" height="80" rx="8"
         stroke="#C41E3A" strokeWidth="3.5" fill="none"
-        filter="url(#glow-app)"
-        className="opacity-95 dark:opacity-80"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="opacity-95 dark:opacity-80 animate-svg-float-y"
       />
-      <motion.rect
+      <rect
         x="90" y="70" width="40" height="40" rx="4"
         stroke="#06B6D4" strokeWidth="3" fill="none"
-        filter="url(#glow-app)"
-        className="opacity-90 dark:opacity-75"
-        animate={{ y: [0, -8, 0], x: [0, -5, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        className="opacity-90 dark:opacity-75 animate-svg-float-up-left"
+        style={{ animationDelay: '0.5s' }}
       />
-      <motion.rect
+      <rect
         x="270" y="70" width="30" height="50" rx="6"
         stroke="#C41E3A" strokeWidth="3" fill="none"
-        filter="url(#glow-app)"
-        className="opacity-90 dark:opacity-75"
-        animate={{ y: [0, -6, 0], x: [0, 5, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="opacity-90 dark:opacity-75 animate-svg-float-up-right"
+        style={{ animationDelay: '1s' }}
       />
-      <motion.rect
+      <rect
         x="100" y="190" width="40" height="20" rx="4"
         stroke="#C41E3A" strokeWidth="3" fill="none"
-        filter="url(#glow-app)"
-        className="opacity-90 dark:opacity-75"
-        animate={{ y: [0, 8, 0], x: [0, -5, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        className="opacity-90 dark:opacity-75 animate-svg-float-down-left"
+        style={{ animationDelay: '1.5s' }}
       />
-      <motion.rect
+      <rect
         x="260" y="190" width="50" height="30" rx="4"
         stroke="#06B6D4" strokeWidth="3" fill="none"
-        filter="url(#glow-app)"
-        className="opacity-90 dark:opacity-75"
-        animate={{ y: [0, 6, 0], x: [0, 5, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+        className="opacity-90 dark:opacity-75 animate-svg-float-down-right"
+        style={{ animationDelay: '0.2s' }}
       />
       
-      <motion.circle r="7" fill="#C41E3A" filter="url(#glow-app)"
-        animate={{ scale: [1, 2, 1], opacity: [0.7, 0.9, 0.7] }}
-        transition={{ duration: 2, repeat: Infinity }}
+      <circle r="7" fill="#C41E3A"
         cx="200" cy="150"
+        className="animate-svg-pulse-center"
       />
     </svg>
   </div>
