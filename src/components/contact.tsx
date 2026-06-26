@@ -57,6 +57,133 @@ export default function Contact() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
+  const getLocalResponse = (query: string): string => {
+    const q = query.toLowerCase();
+    
+    // Urgency Found Partner check first
+    if (q.includes("founding") || q.includes("partner") || q.includes("offer") || q.includes("special")) {
+      return "Yes! We are onboarding our first 5 founding gym partners at a special reduced rate, with direct team access and priority setup. Only limited spots are remaining! Email contact@infernex.in to check availability.";
+    }
+
+    // Specific business types checks (Rule 6)
+    if (q.includes("restaurant") || q.includes("cafe") || q.includes("food") || q.includes("eat")) {
+      return "Absolutely! We work with restaurants and cafes. We build AI reservation booking, customer inquiry handling, promotional campaigns, and more — plus beautiful restaurant websites. Email our team at contact@infernex.in with your requirements and we will put together a custom solution for your restaurant. Book a free demo at infernex.in";
+    }
+    if (q.includes("school") || q.includes("education") || q.includes("student")) {
+      return "Yes! We handle enquiry AI, admission automation, parent communication, event reminders, and student follow-up systems for schools. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote. Use the contact form on our website";
+    }
+    if (q.includes("hospital") || q.includes("clinic") || q.includes("doctor") || q.includes("medical") || q.includes("patient")) {
+      return "Yes, we work with healthcare businesses and clinics too. We build AI appointment booking, patient inquiry handling, reminder systems, and more. Email contact@infernex.in to discuss your requirements and get a custom quote. Book a free demo at infernex.in";
+    }
+    if (q.includes("coaching") || q.includes("institute") || q.includes("demo class")) {
+      return "Absolutely yes. We build AI admission assistants, demo class booking systems, student CRM, parent communication automation, and fee reminder systems for coaching institutes. Reach our team at: contact@infernex.in. Book a free demo at infernex.in";
+    }
+    if (q.includes("grocery") || q.includes("store") || q.includes("supermarket")) {
+      return "Yes. We build order management AI, customer support bots, delivery updates, and promotional campaigns for grocery businesses. Get in touch at contact@infernex.in to discuss your requirements and get a custom quote. Use the contact form on our website";
+    }
+    if (q.includes("travel") || q.includes("agency") || q.includes("consultant")) {
+      return "Absolutely. We build AI travel consultants, booking automation, itinerary follow-up, payment reminders, and customer support systems. Contact us at contact@infernex.in to discuss your requirements. Book a free demo at infernex.in";
+    }
+    if (q.includes("hotel") || q.includes("salon") || q.includes("real estate") || q.includes("gym") || q.includes("fitness")) {
+      // Gym has specific plans listed below, but general inquiries get:
+      if (q.includes("gym") || q.includes("fitness") || q.includes("cost") || q.includes("price") || q.includes("pricing") || q.includes("plan") || q.includes("how much")) {
+        // Proceed to gym plans
+      } else {
+        return "Yes, we work with gym, real estate, hotel, and salon businesses. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote. Book a free demo at infernex.in";
+      }
+    }
+
+    // Pricing & plans
+    if (q.includes("price") || q.includes("cost") || q.includes("pricing") || q.includes("plan") || q.includes("how much") || q.includes("rate")) {
+      if (q.includes("basic") || q.includes("starter") || q.includes("199")) {
+        return "The Basic AI Lead Machine is $199/month (+ one-time $500 setup). It includes: 24/7 AI Voice Receptionist, Website Chat Widget, Lead Capture Dashboard (Google Sheets), Trial Booking Automation, SMS Confirmation to leads, Owner Email Alerts, and a Monthly Report. Book a free demo at infernex.in";
+      }
+      if (q.includes("pro") || q.includes("popular") || q.includes("399")) {
+        return "The AI Receptionist Pro is $399/month (+ one-time $1,500 setup). It includes everything in Basic, plus: Outbound Follow-up Calls (AI calls leads back), Full CRM Dashboard (Airtable), Member Renewal Reminders, SMS and Email Campaigns, Analytics Dashboard, and a Monthly Strategy Call. Book a free demo at infernex.in";
+      }
+      if (q.includes("premium") || q.includes("operating system") || q.includes("799") || q.includes("os")) {
+        return "The AI Gym Operating System is $799/month (+ one-time $3,000 setup). It includes everything in Pro, plus: AI Sales Agent (handles price objections), Multi-Location Support (up to 3 gyms), Staff Management System, Owner AI Assistant Bot (WhatsApp/Telegram), Facebook Ads Integration, Advanced Analytics, and Priority Support. Book a free demo at infernex.in";
+      }
+      return "We have three plans starting at $199/month plus a one-time setup fee:\n- Basic: $500 setup + $199/month\n- Pro: $1,500 setup + $399/month\n- Premium: $3,000 setup + $799/month\nWe also offer custom pricing. Would you like details on any specific plan? Or book a free demo at infernex.in";
+    }
+
+    // Services
+    if (q.includes("service") || q.includes("what do you do") || q.includes("offer") || q.includes("work")) {
+      return "We offer three core services: \n1. AI AGENTS (24/7 natural voice receptionists and chatbots that capture leads, book trials, and follow up).\n2. WEBSITE DEVELOPMENT (stunning, fast, conversion-optimized websites).\n3. AUTOMATION SYSTEMS (automating workflows, CRM, email/SMS campaigns, and renewal reminders).\nWhich service are you interested in? Email us at contact@infernex.in";
+    }
+
+    // AI receptionist details
+    if (q.includes("voice") || q.includes("receptionist") || q.includes("phone") || q.includes("call")) {
+      return "Our AI voice receptionist answers your business calls automatically 24/7. It speaks naturally like a human, answers customer questions, collects contact details, books appointments, and sends confirmation SMS—all naturally. Every call is answered and captured! Book a free demo at infernex.in to hear it in action.";
+    }
+
+    // Website details
+    if (q.includes("website") || q.includes("web dev") || q.includes("develop")) {
+      return "Yes, absolutely! We build modern, fast, fully responsive websites optimized for speed, SEO, and converting visitors. Contact our team for a custom quote: contact@infernex.in";
+    }
+
+    // Automation details
+    if (q.includes("automate") || q.includes("automation") || q.includes("workflow")) {
+      return "We automate your entire business workflow—including CRM management (Google Sheets/Airtable), automated email/SMS follow-ups, renewal reminders, and analytics reporting so your business runs on autopilot 24/7. Book a free demo at infernex.in";
+    }
+
+    // Contract concern
+    if (q.includes("contract") || q.includes("agreement") || q.includes("cancel")) {
+      return "No long-term contracts! We operate on a simple 30-day cancellation policy. Cancel anytime with 30 days notice—no hidden fees, no lock-in, no risk. We are confident you will love the results. Email us at contact@infernex.in";
+    }
+
+    // Setup process & duration
+    if (q.includes("how it works") || q.includes("process") || q.includes("step") || q.includes("setup")) {
+      if (q.includes("how long") || q.includes("time") || q.includes("duration") || q.includes("setup take")) {
+        return "For standard setups, we go live within 48 hours of receiving your information! Complex custom setups with multiple integrations may take 1-2 weeks. Email us at contact@infernex.in to get started.";
+      }
+      return "Our setup is simple: \nStep 1: Discovery Call (30 min) to learn your hours, pricing, and goals. \nStep 2: We build everything in 24-48 hours (you do nothing).\nStep 3: Go live and start capturing leads automatically! Book a free demo at infernex.in";
+    }
+
+    // Location / operation
+    if (q.includes("where") || q.includes("location") || q.includes("based") || q.includes("country") || q.includes("us")) {
+      return "Infernex operates globally, primarily serving clients in the United States. Our team works remotely and is available to support clients across all time zones. Email us at contact@infernex.in";
+    }
+
+    // Natural sounding
+    if (q.includes("natural") || q.includes("sound") || q.includes("human") || q.includes("real person")) {
+      return "Yes! Our AI voice receptionists use advanced natural language processing that sounds human. Callers get natural flows, pricing info, and booking seamlessly. Want to hear it? Book a free demo at infernex.in and our AI will call you directly!";
+    }
+
+    // Tech questions
+    if (q.includes("tech") || q.includes("technology") || q.includes("software") || q.includes("tool")) {
+      return "We use industry-leading tools: Vapi AI for voice, Claude AI (Anthropic) for intelligence, Twilio for SMS, n8n for workflow automation, Google Sheets/Airtable for data, and Looker Studio for analytics. Email contact@infernex.in to check compatibility with your current tools.";
+    }
+
+    // Security / data safety
+    if (q.includes("safe") || q.includes("security") || q.includes("data") || q.includes("privacy")) {
+      return "Yes, your data is 100% safe. We use enterprise-grade security. Customer information is stored securely and never shared with third parties. We comply with all standard data protection requirements. Email contact@infernex.in for more details.";
+    }
+
+    // Results & ROI
+    if (q.includes("result") || q.includes("roi") || q.includes("return") || q.includes("expect")) {
+      return "Most clients see return on investment within the first month. Just one booked member covers the fee, and every call answered is pure profit. Expect zero missed calls, automated lead capture, and trial bookings. Email us at contact@infernex.in";
+    }
+
+    // Getting started / book demo
+    if (q.includes("start") || q.includes("get started") || q.includes("join") || q.includes("buy") || q.includes("book") || q.includes("demo")) {
+      return "Getting started is simple! Email us at contact@infernex.in with your business name and phone number, or book a free demo at infernex.in. We will set up a quick 30-minute discovery call and get you live in 48 hours!";
+    }
+
+    // About Infernex
+    if (q.includes("infernex") || q.includes("who are you") || q.includes("what is it")) {
+      return "Infernex is a next-generation AI agency that builds intelligent AI agents, stunning websites, and automation systems. We help businesses grow by automating customer communication, lead capture, appointment booking, and follow-ups 24/7. Book a free demo at infernex.in";
+    }
+
+    // Rule 6 Specific fallback for custom business inquiries
+    if (q.includes("business") || q.includes("build for") || q.includes("work with")) {
+      return "Yes, we build AI systems and websites for all types of businesses. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote.";
+    }
+
+    // Rule 4 Catch-all (Never say "I don't know")
+    return "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
+  };
+
   const handleSend = async (messageText?: string) => {
     const text = messageText || inputValue.trim();
     if (!text) return;
@@ -72,42 +199,18 @@ export default function Contact() {
       if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
     }, 50);
 
-    try {
-      let historyToSend = updatedHistory;
-      if (historyToSend.length > 12) {
-        historyToSend = [
-          historyToSend[0],
-          ...historyToSend.slice(historyToSend.length - 10)
-        ];
-      }
-
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          messages: historyToSend
-        })
-      });
-
-      if (!response.ok) throw new Error("API request failed");
-      
-      const data = await response.json();
-      const reply = data.choices[0].message.content;
-      
+    // Simulate natural typing delay (800ms)
+    setTimeout(() => {
+      const reply = getLocalResponse(text);
       setChatHistory(prev => [...prev, { role: "assistant", content: reply }]);
-    } catch (error) {
-      console.error("OpenRouter API error:", error);
-      const fallbackText = "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
-      setChatHistory(prev => [...prev, { role: "assistant", content: fallbackText }]);
-    } finally {
       setIsTyping(false);
+      
+      // Auto scroll down again
       setTimeout(() => {
         const scrollDiv = document.getElementById("inferno-messages-scroll");
         if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
       }, 50);
-    }
+    }, 800);
   };  return (
     <section 
       ref={sectionRef}
