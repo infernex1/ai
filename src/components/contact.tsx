@@ -180,8 +180,8 @@ export default function Contact() {
       return "Yes, we build AI systems and websites for all types of businesses. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote.";
     }
 
-    // Rule 4 Catch-all (Never say "I don't know")
-    return "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
+    // Return fallback token to trigger API call for custom questions
+    return "API_FALLBACK";
   };
 
   const handleSend = async (messageText?: string) => {
@@ -199,18 +199,59 @@ export default function Contact() {
       if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
     }, 50);
 
-    // Simulate natural typing delay (800ms)
-    setTimeout(() => {
-      const reply = getLocalResponse(text);
-      setChatHistory(prev => [...prev, { role: "assistant", content: reply }]);
-      setIsTyping(false);
+    const localReply = getLocalResponse(text);
+
+    if (localReply !== "API_FALLBACK") {
+      // Simulate natural typing delay for local rule-based match
+      setTimeout(() => {
+        setChatHistory(prev => [...prev, { role: "assistant", content: localReply }]);
+        setIsTyping(false);
+        setTimeout(() => {
+          const scrollDiv = document.getElementById("inferno-messages-scroll");
+          if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
+        }, 50);
+      }, 700);
+      return;
+    }
+
+    // Call OpenRouter API route for custom answers
+    try {
+      let historyToSend = updatedHistory;
+      if (historyToSend.length > 12) {
+        historyToSend = [
+          historyToSend[0],
+          ...historyToSend.slice(historyToSend.length - 10)
+        ];
+      }
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: historyToSend
+        })
+      });
+
+      if (!response.ok) throw new Error("API request failed");
       
-      // Auto scroll down again
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+      
+      setChatHistory(prev => [...prev, { role: "assistant", content: reply }]);
+    } catch (error) {
+      console.error("OpenRouter API error:", error);
+      // Compliance with Rule 4 fallback
+      const finalFallback = "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
+      setChatHistory(prev => [...prev, { role: "assistant", content: finalFallback }]);
+    } finally {
+      setIsTyping(false);
       setTimeout(() => {
         const scrollDiv = document.getElementById("inferno-messages-scroll");
         if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
       }, 50);
-    }, 800);
+    }
   };  return (
     <section 
       ref={sectionRef}
