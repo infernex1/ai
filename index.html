@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infernex — AI Agents for Gyms & Businesses</title>
+<meta name="description" content="Infernex builds and manages AI voice receptionists and automation agents for US gyms and businesses. Never miss a lead. 24/7 AI receptionist, lead capture, trial booking automation. Done for you.">
+<meta name="keywords" content="AI agent for gyms, gym AI receptionist, AI automation for gyms, gym lead capture, AI voice agent, gym automation, Infernex">
+<meta property="og:title" content="Infernex — AI Agents for Gyms">
+<meta property="og:description" content="Never miss another gym lead. AI receptionist answers every call 24/7">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080808;--bg2:#0a0a0f;--card-bg:#161616;--text:#ffffff;--text2:#a0a0a0;--accent:#00d4ff;--accent2:#7c3aed;--accent3:#00ffaa;--border:#222222;--gradient:linear-gradient(135deg,#00d4ff,#7c3aed);--gradient2:linear-gradient(135deg,#00d4ff,#00ffaa);--gradient3:linear-gradient(135deg,#7c3aed,#ff6b6b);--glass-bg:rgba(22,22,22,0.6);--glass-border:rgba(255,255,255,0.08);--shadow:0 8px 32px rgba(0,0,0,0.4);--glow-cyan:0 0 30px rgba(0,212,255,0.15);--glow-purple:0 0 30px rgba(124,58,237,0.15)}
+[data-theme="light"]{--bg:#ffffff;--bg2:#f5f5f5;--card-bg:#ffffff;--text:#080808;--text2:#555555;--accent:#0099cc;--accent2:#6d28d9;--accent3:#00cc88;--border:#e0e0e0;--gradient:linear-gradient(135deg,#0099cc,#6d28d9);--gradient2:linear-gradient(135deg,#0099cc,#00cc88);--gradient3:linear-gradient(135deg,#6d28d9,#ff6b6b);--glass-bg:rgba(255,255,255,0.6);--glass-border:rgba(0,0,0,0.08);--shadow:0 8px 32px rgba(0,0,0,0.1);--glow-cyan:0 0 30px rgba(0,153,204,0.1);--glow-purple:0 0 30px rgba(109,40,217,0.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background 0.3s ease,color 0.3s ease;cursor:none}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:0.3;pointer-events:none;z-index:0;transition:opacity 0.3s ease}
+h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* Custom Cursor */
+.cursor-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transition:transform 0.1s ease;mix-blend-mode:normal}
+.cursor-ring{width:36px;height:36px;border:2px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:99998;transition:transform 0.15s ease, width 0.3s ease, height 0.3s ease;opacity:0.6}
+.cursor-ring.hover{width:52px;height:52px;opacity:0.3;border-color:var(--accent2)}
+
+/* Gradient Text */
+.gradient-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Section styling */
+section{position:relative;z-index:1}
+.section-label{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:12px;display:inline-block;position:relative;padding-left:28px}
+.section-label::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:18px;height:2px;background:var(--gradient);border-radius:2px}
+.section-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;margin-bottom:16px;line-height:1.15}
+.section-sub{font-size:1.05rem;color:var(--text2);max-width:600px;margin:0 auto 48px;line-height:1.7;transition:color 0.3s ease}
+.section-header{text-align:center;margin-bottom:56px}
+
+/* ===== SECTION DIVIDERS ===== */
+.section-divider{position:relative;height:1px;width:100%;overflow:visible;z-index:2}
+.section-divider::before{content:'';position:absolute;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);opacity:0.4}
+.section-divider::after{content:'';position:absolute;left:50%;top:-3px;transform:translateX(-50%);width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 12px var(--accent),0 0 24px var(--accent)}
+
+/* ===== FLOATING ORB DECORATIONS ===== */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.08;pointer-events:none;z-index:0;will-change:transform}
+.orb-cyan{background:var(--accent);width:400px;height:400px}
+.orb-purple{background:var(--accent2);width:350px;height:350px}
+.orb-green{background:var(--accent3);width:300px;height:300px}
+
+/* ===== FUTURISTIC CARD BASE ===== */
+.fx-card{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(145deg,rgba(22,22,22,0.8),rgba(16,16,24,0.6));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),box-shadow 0.5s cubic-bezier(0.23,1,0.32,1);will-change:transform}
+[data-theme="light"] .fx-card{background:linear-gradient(145deg,rgba(255,255,255,0.9),rgba(245,245,255,0.7))}
+.fx-card::before{content:'';position:absolute;inset:-1px;border-radius:24px;padding:1px;background:conic-gradient(from var(--card-angle,0deg),transparent 40%,var(--accent) 50%,var(--accent2) 55%,transparent 65%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.5s ease;pointer-events:none}
+.fx-card:hover::before{opacity:1}
+.fx-card:hover{transform:translateY(-10px);box-shadow:var(--glow-cyan),var(--glow-purple),0 20px 60px rgba(0,0,0,0.3)}
+/* Shimmer overlay */
+.fx-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,0.03) 50%,transparent 70%);transform:rotate(0deg);transition:transform 0.6s ease;pointer-events:none}
+.fx-card:hover::after{transform:rotate(180deg)}
+
+/* ===== SCAN LINE EFFECT ON SECTIONS ===== */
+.scan-line-bg::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;z-index:3;pointer-events:none;animation:none}
+.scan-line-bg.active::after{animation:scanDown 4s ease-in-out;opacity:0.3}
+@keyframes scanDown{0%{top:0;opacity:0}10%{opacity:0.3}90%{opacity:0.3}100%{top:100%;opacity:0}}
+
+/* ============ NAVBAR ============ */
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:16px 0;transition:all 0.3s ease}
+.navbar.scrolled{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);padding:10px 0}
+.navbar .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;flex-direction:column;gap:0}
+.nav-logo-text{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px}
+.nav-logo-tag{font-size:0.65rem;color:var(--text2);letter-spacing:3px;text-transform:uppercase;transition:color 0.3s ease}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:0.9rem;font-weight:500;color:var(--text2);position:relative;padding:4px 0;transition:color 0.3s ease}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--gradient);transition:width 0.3s ease;border-radius:2px}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:16px}
+.theme-toggle{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--card-bg);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:all 0.3s ease}
+.theme-toggle:hover{border-color:var(--accent);transform:rotate(30deg)}
+.btn-demo{padding:10px 24px;border-radius:50px;font-size:0.85rem;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;transition:all 0.3s ease;background:var(--gradient);color:#fff;box-shadow:0 4px 15px rgba(0,212,255,0.3)}
+.btn-demo:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(0,212,255,0.4)}
+
+/* Mobile nav */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.hamburger span{width:24px;height:2px;background:var(--text);transition:all 0.3s ease;border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:var(--bg);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;gap:24px;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);z-index:999}
+.mobile-menu.active{right:0}
+.mobile-menu a{font-size:1.1rem;font-weight:500;color:var(--text2);transition:color 0.3s ease;padding:8px 0;border-bottom:1px solid var(--border)}
+.mobile-menu a:hover{color:var(--accent)}
+.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.mobile-overlay.active{opacity:1;pointer-events:all}
+
+/* ============ HERO ============ */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 0 80px}
+#vanta-bg{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:800px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:50px;font-size:0.8rem;font-weight:500;border:1px solid var(--glass-border);background:var(--glass-bg);backdrop-filter:blur(10px);margin-bottom:28px;color:var(--text);transition:all 0.3s ease}
+.hero-title{font-size:clamp(2.5rem,7vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:24px;letter-spacing:-1px}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:600px;margin:0 auto 36px;line-height:1.7;transition:color 0.3s ease}
+.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.btn-primary{padding:14px 36px;border-radius:50px;font-size:0.95rem;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;background:var(--gradient);color:#fff;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,212,255,0.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,212,255,0.5)}
+.btn-secondary{padding:14px 36px;border-radius:50px;font-size:0.95rem;font-weight:600;font-family:'Inter',sans-serif;background:transparent;border:1px solid var(--border);color:var(--text);cursor:pointer;transition:all 0.3s ease}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+.trust-bar{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:0.85rem;color:var(--text2);margin-bottom:48px;transition:color 0.3s ease}
+.trust-bar span{display:flex;align-items:center;gap:6px}
+.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.hero-stat{padding:16px 28px;border-radius:16px;background:var(--glass-bg);backdrop-filter:blur(12px);border:1px solid var(--glass-border);text-align:center;animation:floatStat 6s ease-in-out infinite;transition:all 0.3s ease}
+.hero-stat:nth-child(2){animation-delay:2s}
+.hero-stat:nth-child(3){animation-delay:4s}
+.hero-stat .stat-value{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat .stat-label{font-size:0.75rem;color:var(--text2);margin-top:4px;transition:color 0.3s ease}
+@keyframes floatStat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;animation:bounce 2s ease-in-out infinite}
+.scroll-indicator svg{width:24px;height:24px;stroke:var(--text2);transition:stroke 0.3s ease}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(12px)}}
+
+/* ============ INDUSTRIES ============ */
+#industries{padding:120px 0;background:var(--bg2);transition:background 0.3s ease;overflow:hidden}
+.industries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.industry-card{padding:36px 28px;text-align:center;cursor:pointer;--card-angle:0deg}
+.industry-card .industry-icon{width:64px;height:64px;border-radius:18px;background:var(--gradient);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(0,212,255,0.25);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),box-shadow 0.5s ease}
+.industry-card:hover .industry-icon{transform:scale(1.1) rotate(5deg);box-shadow:0 12px 32px rgba(0,212,255,0.35)}
+.industry-icon svg{width:28px;height:28px;fill:#fff;stroke:none}
+.icon-wrap{width:48px;height:48px;border-radius:14px;background:var(--gradient);display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,212,255,0.2)}
+.icon-wrap svg{width:24px;height:24px;fill:#fff;stroke:none}
+.icon-wrap-lg{width:52px;height:52px;border-radius:14px;background:var(--gradient);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 4px 16px rgba(0,212,255,0.2)}
+.icon-wrap-lg svg{width:26px;height:26px;fill:#fff;stroke:none}
+.star-rating{display:flex;gap:3px;margin-bottom:16px}
+.star-rating svg{width:18px;height:18px;fill:#f59e0b}
+.industry-name{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.industry-badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;position:relative;overflow:hidden}
+.industry-badge.available{background:rgba(0,212,255,0.12);color:var(--accent);border:1px solid rgba(0,212,255,0.3)}
+.industry-badge.available::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.15),transparent);animation:badgeShimmer 3s ease-in-out infinite}
+@keyframes badgeShimmer{0%{left:-100%}50%,100%{left:100%}}
+.industry-badge.coming{background:rgba(124,58,237,0.1);color:var(--accent2);border:1px solid rgba(124,58,237,0.2)}
+
+/* ============ PROBLEM ============ */
+#problem{padding:120px 0;transition:background 0.3s ease;overflow:hidden}
+.problem-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:56px}
+.problem-card{padding:48px 32px;text-align:center;--card-angle:0deg;background:linear-gradient(145deg,rgba(22,22,22,0.8),rgba(30,10,10,0.4)) !important}
+[data-theme="light"] .problem-card{background:linear-gradient(145deg,rgba(255,255,255,0.9),rgba(255,245,245,0.7)) !important}
+.problem-card:hover{box-shadow:0 0 40px rgba(255,77,77,0.12),0 20px 60px rgba(0,0,0,0.3) !important}
+.problem-number{font-family:'Space Grotesk',sans-serif;font-size:4rem;font-weight:700;background:linear-gradient(135deg,#ff4d4d,#ff8c42);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;line-height:1}
+.problem-desc{font-size:0.95rem;color:var(--text2);transition:color 0.3s ease;line-height:1.6}
+.problem-bottom{text-align:center;font-size:1.1rem;color:var(--text2);font-style:italic;transition:color 0.3s ease;position:relative;padding:24px 0}
+.problem-bottom::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);width:60px;height:1px;background:var(--gradient3)}
+
+/* ============ SOLUTION ============ */
+#solution{padding:120px 0;background:var(--bg2);transition:background 0.3s ease;overflow:hidden}
+.solution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.solution-card{padding:40px 36px;--card-angle:0deg}
+.solution-icon{width:60px;height:60px;border-radius:16px;background:var(--gradient);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(0,212,255,0.25);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1)}
+.solution-card:hover .solution-icon{transform:scale(1.1) rotate(-5deg)}
+.solution-icon svg{width:28px;height:28px;fill:#fff;stroke:none}
+.solution-title{font-size:1.25rem;font-weight:700;margin-bottom:10px}
+.solution-desc{font-size:0.92rem;color:var(--text2);line-height:1.7;transition:color 0.3s ease}
+
+/* ============ HOW IT WORKS ============ */
+#how-it-works{padding:120px 0;transition:background 0.3s ease;overflow:hidden}
+.steps-container{display:flex;align-items:flex-start;justify-content:center;gap:0;position:relative;max-width:900px;margin:0 auto 48px}
+.step{flex:1;text-align:center;position:relative;padding:0 20px}
+.step-number{width:64px;height:64px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;margin:0 auto 20px;position:relative;z-index:2;box-shadow:0 6px 24px rgba(0,212,255,0.35);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),box-shadow 0.5s ease}
+.step:hover .step-number{transform:scale(1.15);box-shadow:0 8px 32px rgba(0,212,255,0.5)}
+/* Pulse ring around step number */
+.step-number::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--accent);opacity:0;animation:stepPulse 3s ease-in-out infinite}
+.step:nth-child(1) .step-number::after{animation-delay:0s}
+.step:nth-child(2) .step-number::after{animation-delay:1s}
+.step:nth-child(3) .step-number::after{animation-delay:2s}
+@keyframes stepPulse{0%{transform:scale(1);opacity:0.6}50%{transform:scale(1.4);opacity:0}100%{transform:scale(1);opacity:0}}
+.step-icon{width:48px;height:48px;border-radius:14px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;transition:all 0.4s ease}
+.step:hover .step-icon{background:rgba(0,212,255,0.15);border-color:rgba(0,212,255,0.3);transform:translateY(-4px)}
+.step-icon svg{width:22px;height:22px;fill:var(--accent);stroke:none}
+.step-title{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.step-desc{font-size:0.88rem;color:var(--text2);line-height:1.7;transition:color 0.3s ease}
+.steps-line{position:absolute;top:32px;left:16%;right:16%;height:2px;background:var(--border);z-index:1;transition:background 0.3s ease}
+.steps-line-progress{position:absolute;top:0;left:0;width:0;height:100%;background:var(--gradient);border-radius:2px;box-shadow:0 0 10px rgba(0,212,255,0.5)}
+.steps-bottom{text-align:center;font-size:1rem;color:var(--text2);max-width:550px;margin:0 auto;transition:color 0.3s ease}
+
+/* ============ PRICING ============ */
+#pricing{padding:120px 0;background:var(--bg2);transition:background 0.3s ease;overflow:hidden}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
+.pricing-card{padding:40px 32px;border-radius:24px;position:relative;overflow:hidden;--card-angle:0deg}
+.pricing-card.featured{border:2px solid transparent;background-image:linear-gradient(var(--card-bg),var(--card-bg)),var(--gradient);background-origin:border-box;background-clip:padding-box,border-box}
+[data-theme="dark"] .pricing-card.featured{background-image:linear-gradient(rgba(16,16,24,0.95),rgba(16,16,24,0.95)),var(--gradient)}
+/* Featured card ambient glow */
+.pricing-card.featured::after{content:'';position:absolute;inset:-2px;border-radius:24px;background:var(--gradient);opacity:0.08;z-index:-1;filter:blur(20px);animation:glowPulse 4s ease-in-out infinite alternate}
+@keyframes glowPulse{0%{opacity:0.05;filter:blur(20px)}100%{opacity:0.12;filter:blur(30px)}}
+.pricing-badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.pricing-badge.starter{background:rgba(0,212,255,0.1);color:var(--accent);border:1px solid rgba(0,212,255,0.2)}
+.pricing-badge.popular{background:var(--gradient);color:#fff}
+.pricing-badge.premium{background:rgba(124,58,237,0.12);color:var(--accent2);border:1px solid rgba(124,58,237,0.25)}
+.pricing-name{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+.pricing-price{margin-bottom:28px}
+.pricing-setup{font-size:0.85rem;color:var(--text2);transition:color 0.3s ease}
+.pricing-monthly{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pricing-monthly span{font-size:0.9rem;font-weight:400;-webkit-text-fill-color:var(--text2);color:var(--text2);transition:color 0.3s ease}
+.pricing-features{list-style:none;margin-bottom:32px;display:flex;flex-direction:column;gap:14px}
+.pricing-features li{font-size:0.88rem;color:var(--text2);display:flex;align-items:center;gap:10px;transition:color 0.3s ease}
+.pricing-features li::before{content:'';display:inline-block;width:18px;height:18px;min-width:18px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300d4ff'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");background-size:contain;background-repeat:no-repeat}
+.pricing-btn{width:100%;padding:16px;border-radius:50px;font-size:0.92rem;font-weight:600;font-family:'Inter',sans-serif;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;transition:all 0.4s cubic-bezier(0.23,1,0.32,1);position:relative;overflow:hidden}
+.pricing-btn::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0;transition:opacity 0.4s ease;border-radius:50px}
+.pricing-btn:hover{border-color:transparent;color:#fff;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,212,255,0.3)}
+.pricing-btn:hover::before{opacity:1}
+.pricing-btn span{position:relative;z-index:1}
+.pricing-card.featured .pricing-btn{background:var(--gradient);color:#fff;border-color:transparent}
+.pricing-card.featured .pricing-btn::before{display:none}
+.pricing-card.featured .pricing-btn:hover{box-shadow:0 8px 30px rgba(0,212,255,0.4);transform:translateY(-3px)}
+
+/* ============ TESTIMONIALS ============ */
+#testimonials{padding:120px 0;transition:background 0.3s ease;overflow:hidden}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.testimonial-card{padding:36px 32px;--card-angle:0deg}
+.testimonial-stars{display:flex;gap:4px;margin-bottom:18px}
+.testimonial-stars svg{width:18px;height:18px;fill:#f59e0b;filter:drop-shadow(0 0 4px rgba(245,158,11,0.3))}
+.testimonial-text{font-size:0.95rem;color:var(--text2);line-height:1.8;margin-bottom:24px;font-style:italic;transition:color 0.3s ease;position:relative;padding-left:20px;border-left:2px solid rgba(0,212,255,0.2)}
+.testimonial-author{font-size:0.95rem;font-weight:600;color:var(--text);transition:color 0.3s ease}
+.testimonial-role{font-size:0.82rem;color:var(--text2);transition:color 0.3s ease;margin-top:2px}
+
+/* ============ FAQ ============ */
+#faq{padding:120px 0;background:var(--bg2);transition:background 0.3s ease;overflow:hidden}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq-item{border-radius:18px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(145deg,rgba(22,22,22,0.7),rgba(16,16,24,0.5));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow:hidden;transition:all 0.4s cubic-bezier(0.23,1,0.32,1)}
+[data-theme="light"] .faq-item{border:1px solid rgba(0,0,0,0.06);background:linear-gradient(145deg,rgba(255,255,255,0.85),rgba(245,245,255,0.6))}
+.faq-item:hover{border-color:rgba(0,212,255,0.15);box-shadow:var(--glow-cyan)}
+.faq-item.active{border-color:rgba(0,212,255,0.25);box-shadow:var(--glow-cyan)}
+.faq-question{padding:22px 28px;font-size:1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:color 0.3s ease}
+.faq-question::after{content:'';width:28px;height:28px;min-width:28px;border-radius:50%;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='2'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;transition:all 0.4s cubic-bezier(0.23,1,0.32,1)}
+.faq-item.active .faq-question::after{transform:rotate(45deg);background-color:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.4)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.23,1,0.32,1),padding 0.3s ease}
+.faq-answer p{padding:0 28px 24px;font-size:0.92rem;color:var(--text2);line-height:1.8;transition:color 0.3s ease}
+
+/* ============ CONTACT / CTA ============ */
+#contact{padding:120px 0;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:0.04;z-index:0}
+/* Animated grid bg for contact */
+#contact::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+.contact-inner{position:relative;z-index:1}
+.contact-form{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:0.8rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:1px;transition:color 0.3s ease}
+.form-group input,.form-group select,.form-group textarea{padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(145deg,rgba(22,22,22,0.7),rgba(16,16,24,0.5));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--text);font-family:'Inter',sans-serif;font-size:0.9rem;transition:all 0.4s cubic-bezier(0.23,1,0.32,1);outline:none}
+[data-theme="light"] .form-group input,[data-theme="light"] .form-group select,[data-theme="light"] .form-group textarea{border:1px solid rgba(0,0,0,0.08);background:linear-gradient(145deg,rgba(255,255,255,0.85),rgba(245,245,255,0.6))}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.1),var(--glow-cyan)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-group select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.form-submit{padding:16px 40px;border-radius:50px;font-size:1rem;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;background:var(--gradient);color:#fff;transition:all 0.4s cubic-bezier(0.23,1,0.32,1);box-shadow:0 4px 20px rgba(0,212,255,0.3);align-self:center;margin-top:8px;position:relative;overflow:hidden}
+.form-submit::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s ease,height 0.6s ease}
+.form-submit:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,212,255,0.5)}
+.form-submit:hover::after{width:300px;height:300px}
+.form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.contact-info{text-align:center;margin-top:32px;display:flex;flex-direction:column;gap:8px;font-size:0.9rem;color:var(--text2);transition:color 0.3s ease}
+.form-success{display:none;text-align:center;padding:40px;font-size:1.1rem;color:var(--accent)}
+
+/* ============ FOOTER ============ */
+footer{padding:80px 0 0;background:var(--bg2);border-top:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;position:relative;overflow:hidden}
+[data-theme="light"] footer{border-top:1px solid rgba(0,0,0,0.06)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:48px}
+.footer-logo{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px;margin-bottom:4px}
+.footer-tagline{font-size:0.8rem;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;transition:color 0.3s ease}
+.footer-about{font-size:0.9rem;color:var(--text2);line-height:1.7;transition:color 0.3s ease}
+.footer-heading{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;color:var(--text);transition:color 0.3s ease}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:0.9rem;color:var(--text2);transition:all 0.3s ease;position:relative;display:inline-block;width:fit-content}
+.footer-links a:hover{color:var(--accent);transform:translateX(4px)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding:24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+[data-theme="light"] .footer-bottom{border-top:1px solid rgba(0,0,0,0.06)}
+.footer-copy{font-size:0.8rem;color:var(--text2);transition:color 0.3s ease}
+.footer-social{display:flex;gap:16px}
+.footer-social a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--text2);transition:all 0.4s cubic-bezier(0.23,1,0.32,1);background:linear-gradient(145deg,rgba(22,22,22,0.5),rgba(16,16,24,0.3))}
+[data-theme="light"] .footer-social a{border:1px solid rgba(0,0,0,0.06);background:linear-gradient(145deg,rgba(255,255,255,0.5),rgba(245,245,255,0.3))}
+.footer-social a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,212,255,0.2)}
+
+/* ============ CHAT WIDGET ============ */
+.chat-toggle{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--gradient);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1001;box-shadow:0 4px 20px rgba(0,212,255,0.4);transition:transform 0.3s ease}
+.chat-toggle:hover{transform:scale(1.1)}
+.chat-toggle svg{width:24px;height:24px;fill:#fff}
+.chat-toggle-pulse{position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--accent);animation:pulse 2s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{0%{transform:scale(1);opacity:0.8}50%{transform:scale(1.25);opacity:0}100%{transform:scale(1);opacity:0}}
+.chat-window{position:fixed;bottom:90px;right:24px;width:340px;height:440px;border-radius:20px;background:var(--card-bg);border:1px solid var(--border);display:flex;flex-direction:column;z-index:1001;overflow:hidden;transform:scale(0) translateY(20px);transform-origin:bottom right;opacity:0;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:var(--shadow)}
+.chat-window.active{transform:scale(1) translateY(0);opacity:1}
+.chat-header{padding:16px 20px;background:var(--gradient);color:#fff;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.chat-header-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e}
+.chat-header-info{flex:1}
+.chat-header-name{font-weight:600;font-size:0.95rem}
+.chat-header-status{font-size:0.7rem;opacity:0.85}
+.chat-close{background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;padding:4px;opacity:0.8;transition:opacity 0.2s}
+.chat-close:hover{opacity:1}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:0.85rem;line-height:1.5;word-break:break-word}
+.chat-msg.bot{background:var(--bg2);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;transition:all 0.3s ease}
+.chat-msg.user{background:var(--gradient);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
+.chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--text2);animation:typingDot 1.4s ease-in-out infinite}
+.chat-typing span:nth-child(2){animation-delay:0.2s}
+.chat-typing span:nth-child(3){animation-delay:0.4s}
+@keyframes typingDot{0%,100%{opacity:0.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+.chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;transition:border-color 0.3s ease}
+.chat-input{flex:1;padding:10px 14px;border-radius:50px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:0.85rem;outline:none;transition:all 0.3s ease}
+.chat-input:focus{border-color:var(--accent)}
+.chat-send{width:36px;height:36px;border-radius:50%;background:var(--gradient);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;flex-shrink:0}
+.chat-send:hover{transform:scale(1.1)}
+.chat-send svg{width:16px;height:16px;fill:#fff}
+
+/* ===== INLINE INFERNO CHATBOT ===== */
+.inline-chat-container {
+  max-width: 650px;
+  margin: 0 auto;
+  height: 520px;
+  border-radius: 24px;
+  background: linear-gradient(145deg,rgba(22,22,22,0.85),rgba(16,16,24,0.7));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+[data-theme="light"] .inline-chat-container {
+  background: linear-gradient(145deg,rgba(255,255,255,0.92),rgba(245,245,255,0.85));
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.inline-chat-header {
+  padding: 18px 24px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.inline-chat-header-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00ffaa;
+  box-shadow: 0 0 10px #00ffaa;
+  animation: inlinePulse 2s infinite;
+}
+@keyframes inlinePulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+.inline-chat-header-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+.inline-chat-header-status {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.inline-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.inline-chat-msg {
+  max-width: 80%;
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  word-break: break-word;
+  animation: inlineMessageFadeIn 0.3s ease;
+}
+@keyframes inlineMessageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.inline-chat-msg.bot {
+  background: var(--bg2);
+  color: var(--text);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+[data-theme="light"] .inline-chat-msg.bot {
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.inline-chat-msg.user {
+  background: var(--gradient);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.inline-chat-typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 18px;
+  align-self: flex-start;
+}
+.inline-chat-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text2);
+  animation: inlineTypingDot 1.4s ease-in-out infinite;
+}
+.inline-chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.inline-chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes inlineTypingDot {
+  0%,100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+.suggestion-chips {
+  display: flex;
+  gap: 8px;
+  padding: 10px 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,0.03);
+}
+.suggestion-chips::-webkit-scrollbar {
+  display: none;
+}
+.chip {
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8rem;
+  color: var(--text2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+[data-theme="light"] .chip {
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.chip:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+.inline-chat-input-area {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+[data-theme="light"] .inline-chat-input-area {
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.inline-chat-input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg2);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+[data-theme="light"] .inline-chat-input {
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.inline-chat-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0,212,255,0.15);
+}
+.inline-chat-send {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gradient);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0,212,255,0.2);
+}
+.inline-chat-send:hover {
+  transform: scale(1.08);
+}
+.inline-chat-send svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.fx-reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1)}
+.fx-reveal.revealed{opacity:1;transform:translateY(0)}
+.fx-reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1)}
+.fx-reveal-left.revealed{opacity:1;transform:translateX(0)}
+.fx-reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1)}
+.fx-reveal-right.revealed{opacity:1;transform:translateX(0)}
+.fx-scale{opacity:0;transform:scale(0.9);transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1)}
+.fx-scale.revealed{opacity:1;transform:scale(1)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+.industries-grid,.testimonials-grid{grid-template-columns:repeat(2,1fr)}
+.pricing-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+.footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+.nav-links{display:none}
+.hamburger{display:flex}
+.btn-demo.desktop{display:none}
+.hero-title{font-size:2.2rem}
+.industries-grid,.solution-grid,.problem-stats,.testimonials-grid{grid-template-columns:1fr}
+.steps-container{flex-direction:column;gap:32px}
+.steps-line{display:none}
+.form-row{grid-template-columns:1fr}
+.footer-top{grid-template-columns:1fr}
+.hero-stats{flex-direction:column;align-items:center}
+.chat-window{width:calc(100vw - 32px);right:16px;bottom:80px;height:420px}
+.cursor-dot,.cursor-ring{display:none}
+body{cursor:auto}
+.trust-bar{flex-direction:column;align-items:center;gap:8px}
+section{padding:80px 0 !important}
+}
+@media(max-width:480px){
+.hero-title{font-size:1.8rem}
+.section-title{font-size:1.8rem}
+.pricing-card{padding:28px 20px}
+.hero-buttons{flex-direction:column;align-items:center}
+.btn-primary,.btn-secondary{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+<div class="container">
+<a href="#hero" class="nav-logo">
+<span class="nav-logo-text">INFERNEX</span>
+<span class="nav-logo-tag">AI Agents</span>
+</a>
+<div class="nav-links">
+<a href="#solution">Services</a>
+<a href="#industries">Industries</a>
+<a href="#how-it-works">How It Works</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</div>
+<div class="nav-right">
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+<a href="#contact" class="btn-demo desktop">Book a Demo</a>
+<button class="hamburger" id="hamburger" aria-label="Open menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+<a href="#solution" class="mobile-link">Services</a>
+<a href="#industries" class="mobile-link">Industries</a>
+<a href="#how-it-works" class="mobile-link">How It Works</a>
+<a href="#pricing" class="mobile-link">Pricing</a>
+<a href="#contact" class="mobile-link">Contact</a>
+<a href="#contact" class="btn-demo" style="text-align:center;margin-top:8px">Book a Demo</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+<div id="vanta-bg"></div>
+<div class="hero-content container">
+<div class="hero-badge" data-aos="fade-down" data-aos-delay="100"><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)" style="flex-shrink:0"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.07A7 7 0 0 1 14 22h-4a7 7 0 0 1-6.93-6H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2zm-4 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm8 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg> Next Generation AI Agents</div>
+<h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+<span class="gradient-text">Your Business Deserves</span><br>
+<span class="gradient-text">A 24/7 AI Agent</span>
+</h1>
+<p class="hero-sub" data-aos="fade-up" data-aos-delay="350">We build and manage intelligent AI agents that answer calls, capture leads, book appointments, and automate your entire customer journey. Fully done for you.</p>
+<div class="hero-buttons" data-aos="fade-up" data-aos-delay="450">
+<a href="#contact" class="btn-primary">See Live Demo</a>
+<a href="#pricing" class="btn-secondary">View Pricing</a>
+</div>
+<div class="trust-bar" data-aos="fade-up" data-aos-delay="550">
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Setup in 48 hours</span>
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> No contracts</span>
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Cancel anytime</span>
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent)" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Done for you</span>
+</div>
+<div class="hero-stats" data-aos="fade-up" data-aos-delay="650">
+<div class="hero-stat"><div class="stat-value">500+</div><div class="stat-label">Leads Captured</div></div>
+<div class="hero-stat"><div class="stat-value">24/7</div><div class="stat-label">Availability</div></div>
+<div class="hero-stat"><div class="stat-value">48hr</div><div class="stat-label">Setup</div></div>
+</div>
+</div>
+<div class="scroll-indicator">
+<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- INDUSTRIES -->
+<section id="industries" class="scan-line-bg">
+<div class="orb orb-cyan" style="top:-10%;right:-5%"></div>
+<div class="orb orb-purple" style="bottom:-10%;left:-5%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">Who We Serve</span>
+<h2 class="section-title gradient-text">AI Agents For Every Business</h2>
+<p class="section-sub">Currently specializing in gyms and fitness businesses. Expanding to all industries.</p>
+</div>
+<div class="industries-grid">
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.05s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg></div>
+<div class="industry-name">Gyms & Fitness</div>
+<span class="industry-badge available">Available Now</span>
+</div>
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.1s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg></div>
+<div class="industry-name">Restaurants & Cafes</div>
+<span class="industry-badge coming">Coming Soon</span>
+</div>
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.15s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg></div>
+<div class="industry-name">Clinics & Hospitals</div>
+<span class="industry-badge coming">Coming Soon</span>
+</div>
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.2s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M18.36 9l.6 3H5.04l.6-3h12.72M20 4H4v2h16V4zm0 3H4l-1 5v2h1v6h10v-6h4v6h2v-6h1v-2l-1-5zM6 18v-4h6v4H6z"/></svg></div>
+<div class="industry-name">Retail & Malls</div>
+<span class="industry-badge coming">Coming Soon</span>
+</div>
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.25s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+<div class="industry-name">Real Estate</div>
+<span class="industry-badge coming">Coming Soon</span>
+</div>
+<div class="industry-card fx-card fx-reveal" style="transition-delay:0.3s">
+<div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/></svg></div>
+<div class="industry-name">Coaching Institutes</div>
+<span class="industry-badge coming">Coming Soon</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- PROBLEM -->
+<section id="problem" class="scan-line-bg">
+<div class="orb orb-purple" style="top:10%;right:-8%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">The Problem</span>
+<h2 class="section-title gradient-text">You're Losing Customers Every Day</h2>
+</div>
+<div class="problem-stats">
+<div class="problem-card fx-card fx-reveal" style="transition-delay:0.05s">
+<div class="problem-number" data-count="80">0%</div>
+<p class="problem-desc">Of callers hang up at voicemail</p>
+</div>
+<div class="problem-card fx-card fx-reveal" style="transition-delay:0.15s">
+<div class="problem-number" data-count="50" data-prefix="$" data-suffix="K+">$0K+</div>
+<p class="problem-desc">Lost yearly in missed leads</p>
+</div>
+<div class="problem-card fx-card fx-reveal" style="transition-delay:0.25s">
+<div class="problem-number" data-count="67">0%</div>
+<p class="problem-desc">Of calls happen after business hours</p>
+</div>
+</div>
+<p class="problem-bottom fx-reveal">While you sleep, competitors with AI agents are capturing your leads.</p>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- SOLUTION -->
+<section id="solution" class="scan-line-bg">
+<div class="orb orb-cyan" style="top:-5%;left:-8%"></div>
+<div class="orb orb-green" style="bottom:-5%;right:-5%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">The Solution</span>
+<h2 class="section-title gradient-text">Meet Your New AI Agent</h2>
+<p class="section-sub">Always on. Never tired. Never misses a lead.</p>
+</div>
+<div class="solution-grid">
+<div class="solution-card fx-card fx-reveal" style="transition-delay:0.05s">
+<div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></div>
+<h3 class="solution-title">Answers Every Call</h3>
+<p class="solution-desc">Your AI picks up instantly, 24/7, 365 days a year. No missed calls, ever.</p>
+</div>
+<div class="solution-card fx-card fx-reveal" style="transition-delay:0.1s">
+<div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></div>
+<h3 class="solution-title">Books Appointments</h3>
+<p class="solution-desc">Automatically schedules trials and meetings directly into your calendar.</p>
+</div>
+<div class="solution-card fx-card fx-reveal" style="transition-delay:0.15s">
+<div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
+<h3 class="solution-title">Captures Every Lead</h3>
+<p class="solution-desc">Name, phone, intent — saved automatically to your dashboard.</p>
+</div>
+<div class="solution-card fx-card fx-reveal" style="transition-delay:0.2s">
+<div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></div>
+<h3 class="solution-title">Follows Up Automatically</h3>
+<p class="solution-desc">SMS and email sequences run on autopilot so no lead falls through the cracks.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="scan-line-bg">
+<div class="orb orb-green" style="top:5%;right:-10%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">The Process</span>
+<h2 class="section-title gradient-text">Live in 48 Hours</h2>
+</div>
+<div class="steps-container fx-reveal">
+<div class="steps-line"><div class="steps-line-progress" id="stepsProgress"></div></div>
+<div class="step">
+<div class="step-number">1</div>
+<div class="step-icon"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></div>
+<h3 class="step-title">We Onboard You</h3>
+<p class="step-desc">A quick 30‑minute call to understand your business, goals, and customer flow.</p>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<div class="step-icon"><svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg></div>
+<h3 class="step-title">We Build Everything</h3>
+<p class="step-desc">Our team configures your AI agent, scripts, and integrations. You do nothing.</p>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<div class="step-icon"><svg viewBox="0 0 24 24"><path d="M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89L2 10.69l4.05-4.05c.47-.47 1.15-.68 1.81-.55l1.33.26zM11.17 17s3.74-1.55 5.89-3.7c5.4-5.4 4.5-12.15 4.5-12.15s-6.75-.9-12.15 4.5C7.26 7.8 5.72 11.54 5.72 11.54l6.45 5.46zM15.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-5.81 8.65l.26 1.33c.13.66-.08 1.34-.55 1.81L5.35 25l-1.55-3.62c.31-.13 3.6-1.53 5.89-3.57v-.16z"/></svg></div>
+<h3 class="step-title">AI Goes Live</h3>
+<p class="step-desc">Your AI agent starts answering calls and capturing leads from day one.</p>
+</div>
+</div>
+<p class="steps-bottom fx-reveal">Most clients see their first AI‑captured lead within 24 hours of going live.</p>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- PRICING -->
+<section id="pricing" class="scan-line-bg">
+<div class="orb orb-purple" style="top:-5%;left:-5%"></div>
+<div class="orb orb-cyan" style="bottom:-5%;right:-8%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">Pricing</span>
+<h2 class="section-title gradient-text">Simple. Transparent. No Surprises.</h2>
+<p class="section-sub">Setup fee + low monthly. Cancel anytime.</p>
+</div>
+<div class="pricing-grid">
+<!-- Basic -->
+<div class="pricing-card fx-card fx-reveal" style="transition-delay:0.05s">
+<span class="pricing-badge starter">Starter</span>
+<h3 class="pricing-name">Basic AI Lead Machine</h3>
+<div class="pricing-price">
+<div class="pricing-setup">$500 setup</div>
+<div class="pricing-monthly">$199<span>/month</span></div>
+</div>
+<ul class="pricing-features">
+<li>AI Voice Receptionist 24/7</li>
+<li>Website Chat Widget</li>
+<li>Lead Capture Dashboard</li>
+<li>Trial Booking Automation</li>
+<li>SMS Confirmation</li>
+<li>Owner Email Alerts</li>
+<li>Monthly Report</li>
+</ul>
+<button class="pricing-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><span>Get Started</span></button>
+</div>
+<!-- Pro -->
+<div class="pricing-card fx-card featured fx-reveal" style="transition-delay:0.15s">
+<span class="pricing-badge popular">Most Popular</span>
+<h3 class="pricing-name">AI Receptionist Pro</h3>
+<div class="pricing-price">
+<div class="pricing-setup">$1,500 setup</div>
+<div class="pricing-monthly">$399<span>/month</span></div>
+</div>
+<ul class="pricing-features">
+<li>Everything in Basic</li>
+<li>Outbound Follow-up Calls</li>
+<li>Full CRM Dashboard</li>
+<li>Member Renewal Reminders</li>
+<li>SMS &amp; Email Campaigns</li>
+<li>Analytics Dashboard</li>
+<li>Monthly Strategy Call</li>
+</ul>
+<button class="pricing-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><span>Get Started</span></button>
+</div>
+<!-- Premium -->
+<div class="pricing-card fx-card fx-reveal" style="transition-delay:0.25s">
+<span class="pricing-badge premium">Premium</span>
+<h3 class="pricing-name">AI Gym Operating System</h3>
+<div class="pricing-price">
+<div class="pricing-setup">$3,000 setup</div>
+<div class="pricing-monthly">$799<span>/month</span></div>
+</div>
+<ul class="pricing-features">
+<li>Everything in Pro</li>
+<li>AI Sales Agent</li>
+<li>Multi-Location (3 gyms)</li>
+<li>Staff Management</li>
+<li>Owner AI Assistant Bot</li>
+<li>Facebook Ads Integration</li>
+<li>Advanced Analytics</li>
+</ul>
+<button class="pricing-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"><span>Get Started</span></button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="scan-line-bg">
+<div class="orb orb-green" style="top:-10%;left:10%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">Results</span>
+<h2 class="section-title gradient-text">What Our Clients Say</h2>
+</div>
+<div class="testimonials-grid">
+<div class="testimonial-card fx-card fx-reveal" style="transition-delay:0.05s">
+<div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+<p class="testimonial-text">"Since installing Infernex AI, we haven't missed a single lead. Booked 23 trials in the first month."</p>
+<div class="testimonial-author">Mike Johnson</div>
+<div class="testimonial-role">Owner, Iron Peak Fitness</div>
+</div>
+<div class="testimonial-card fx-card fx-reveal" style="transition-delay:0.15s">
+<div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+<p class="testimonial-text">"Setup was done in 48 hours. The AI sounds completely natural. Our members don't even know it's AI."</p>
+<div class="testimonial-author">Sarah Williams</div>
+<div class="testimonial-role">Peak Performance Gym</div>
+</div>
+<div class="testimonial-card fx-card fx-reveal" style="transition-delay:0.25s">
+<div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+<p class="testimonial-text">"ROI was immediate. Paid for itself in the first week from leads we would have lost to voicemail."</p>
+<div class="testimonial-author">David Chen</div>
+<div class="testimonial-role">FitZone Athletics</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- FAQ -->
+<section id="faq" class="scan-line-bg">
+<div class="orb orb-purple" style="top:20%;left:-8%"></div>
+<div class="container">
+<div class="section-header fx-reveal">
+<span class="section-label">FAQ</span>
+<h2 class="section-title gradient-text">Frequently Asked Questions</h2>
+</div>
+<div class="faq-list">
+<div class="faq-item fx-reveal" style="transition-delay:0.05s">
+<div class="faq-question">Do I need a website to use this?</div>
+<div class="faq-answer"><p>No. Your AI phone number works on Google Business, Facebook, Instagram, anywhere you list your number.</p></div>
+</div>
+<div class="faq-item fx-reveal" style="transition-delay:0.1s">
+<div class="faq-question">How long does setup take?</div>
+<div class="faq-answer"><p>48 hours from payment to your AI going live. We handle everything — you do nothing.</p></div>
+</div>
+<div class="faq-item fx-reveal" style="transition-delay:0.15s">
+<div class="faq-question">What if the AI can't answer something?</div>
+<div class="faq-answer"><p>The AI captures their name and number and notifies you immediately. You follow up manually for complex queries.</p></div>
+</div>
+<div class="faq-item fx-reveal" style="transition-delay:0.2s">
+<div class="faq-question">Can I cancel anytime?</div>
+<div class="faq-answer"><p>Yes. 30-day cancellation policy. No long term contracts. No hidden fees.</p></div>
+</div>
+<div class="faq-item fx-reveal" style="transition-delay:0.25s">
+<div class="faq-question">Is this really done for you?</div>
+<div class="faq-answer"><p>100%. We build it, we manage it, we fix it if anything breaks. You just watch the leads come in.</p></div>
+</div>
+<div class="faq-item fx-reveal" style="transition-delay:0.3s">
+<div class="faq-question">What industries do you serve?</div>
+<div class="faq-answer"><p>Currently specializing in gyms and fitness businesses. Expanding to restaurants, clinics, and retail in 2026.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Divider -->
+<div class="section-divider"></div>
+
+<!-- CONTACT / CTA -->
+<section id="contact">
+<div class="container contact-inner">
+<div class="section-header fx-reveal">
+<span class="section-label">Get Started</span>
+<h2 class="section-title gradient-text">Ready to Never Miss a Lead Again?</h2>
+<p class="section-sub">Book a free 15-minute demo. See the AI in action live.</p>
+</div>
+<div class="inline-chat-container fx-reveal" id="infernoChatContainer" style="transition-delay:0.1s">
+  <div class="inline-chat-header">
+    <div class="inline-chat-header-dot"></div>
+    <div style="flex: 1;">
+      <div class="inline-chat-header-name">INFERNO</div>
+      <div class="inline-chat-header-status">Online • Powered by Nemotron 3</div>
+    </div>
+  </div>
+  <div class="inline-chat-messages" id="infernoMessages">
+    <div class="inline-chat-msg bot">Hi there! I am Inferno, the Infernex AI assistant. I can answer any questions you have about our services, pricing plans, and agency solutions. Ask me anything!</div>
+  </div>
+  <div class="suggestion-chips">
+    <div class="chip" onclick="sendInlineSuggestion('What is Infernex?')">What is Infernex?</div>
+    <div class="chip" onclick="sendInlineSuggestion('How much does it cost?')">Pricing Plans</div>
+    <div class="chip" onclick="sendInlineSuggestion('What is an AI voice receptionist?')">AI Receptionist</div>
+    <div class="chip" onclick="sendInlineSuggestion('Book a free demo')">Book a Demo</div>
+    <div class="chip" onclick="sendInlineSuggestion('Can you build for schools?')">Other Industries</div>
+  </div>
+  <div class="inline-chat-input-area">
+    <input type="text" class="inline-chat-input" id="infernoInput" placeholder="Ask Inferno about Infernex..." autocomplete="off">
+    <button class="inline-chat-send" id="infernoSend" aria-label="Send message">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+<div class="contact-info fx-reveal" style="transition-delay:0.2s">
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)" style="vertical-align:middle;margin-right:6px"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>contact@infernex.in</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)" style="vertical-align:middle;margin-right:6px"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/></svg>We respond within 24 hours</span>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-top">
+<div>
+<div class="footer-logo">INFERNEX</div>
+<div class="footer-tagline">Next Generation AI Agents</div>
+<p class="footer-about">We build AI agents that work 24/7 so you never miss another lead or customer. Fully managed. Fully automated.</p>
+</div>
+<div>
+<div class="footer-heading">Services</div>
+<div class="footer-links">
+<a href="#pricing">Basic</a>
+<a href="#pricing">Pro</a>
+<a href="#pricing">Premium</a>
+<a href="#contact">Custom Solutions</a>
+</div>
+</div>
+<div>
+<div class="footer-heading">Contact</div>
+<div class="footer-links">
+<a href="mailto:contact@infernex.in">contact@infernex.in</a>
+<a href="https://infernex.in" target="_blank" rel="noopener">infernex.in</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<span class="footer-copy">&copy; 2026 Infernex. All rights reserved.</span>
+<div class="footer-social">
+<a href="#" aria-label="Twitter/X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+<a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+<a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- CHAT WIDGET -->
+<button class="chat-toggle" id="chatToggle" aria-label="Open chat">
+<div class="chat-toggle-pulse"></div>
+<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+</button>
+<div class="chat-window" id="chatWindow">
+<div class="chat-header">
+<div class="chat-header-dot"></div>
+<div class="chat-header-info">
+<div class="chat-header-name">Inferno</div>
+<div class="chat-header-status">Online • Powered by Nemotron 3</div>
+</div>
+<button class="chat-close" id="chatClose" aria-label="Close chat">&times;</button>
+</div>
+<div class="chat-messages" id="chatMessages">
+<div class="chat-msg bot">Hi there! I'm Inferno, the Infernex AI assistant. Want to see how we can automate your business? Ask me anything!</div>
+</div>
+<div class="chat-input-area">
+<input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off">
+<button class="chat-send" id="chatSend" aria-label="Send message">
+<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+</button>
+</div>
+</div>
+
+<!-- CDN Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+/* ===== THEME TOGGLE ===== */
+const html = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('infernex-theme');
+if (saved) { html.setAttribute('data-theme', saved); }
+function updateToggleIcon(theme) {
+  var moon = themeToggle.querySelector('.icon-moon');
+  var sun = themeToggle.querySelector('.icon-sun');
+  if (theme === 'dark') { moon.style.display = ''; sun.style.display = 'none'; }
+  else { moon.style.display = 'none'; sun.style.display = ''; }
+}
+updateToggleIcon(html.getAttribute('data-theme'));
+
+let vantaEffect = null;
+function initVanta() {
+  if (typeof VANTA === 'undefined' || typeof THREE === 'undefined') return;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (vantaEffect) vantaEffect.destroy();
+  vantaEffect = VANTA.NET({
+    el: '#vanta-bg',
+    THREE: THREE,
+    mouseControls: true,
+    touchControls: true,
+    minHeight: 200,
+    minWidth: 200,
+    scale: 1,
+    scaleMobile: 1,
+    color: isDark ? 0x00d4ff : 0x0099cc,
+    backgroundColor: isDark ? 0x080808 : 0xffffff,
+    points: 10,
+    maxDistance: 22,
+    spacing: 18,
+    showDots: true
+  });
+}
+
+themeToggle.addEventListener('click', function() {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('infernex-theme', next);
+  updateToggleIcon(next);
+  initVanta();
+});
+
+/* ===== INTERSECTION OBSERVER FOR REVEAL ANIMATIONS ===== */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      // Add a small delay based on the element's transition-delay
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fx-reveal, .fx-reveal-left, .fx-reveal-right, .fx-scale').forEach(function(el) {
+  revealObserver.observe(el);
+});
+
+/* ===== SCAN LINE TRIGGER ===== */
+var scanObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      scanObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.scan-line-bg').forEach(function(el) {
+  scanObserver.observe(el);
+});
+
+/* ===== ANIMATED CARD BORDER ROTATION ===== */
+var cardAngle = 0;
+function animateCardBorders() {
+  cardAngle += 0.5;
+  document.documentElement.style.setProperty('--card-angle', cardAngle + 'deg');
+  requestAnimationFrame(animateCardBorders);
+}
+// Use a single CSS variable for all cards — GPU friendly
+requestAnimationFrame(animateCardBorders);
+
+/* ===== MAGNETIC HOVER ON CARDS (Desktop only) ===== */
+if (window.innerWidth > 768) {
+  document.querySelectorAll('.fx-card').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var centerX = rect.width / 2;
+      var centerY = rect.height / 2;
+      var rotateX = (y - centerY) / 25;
+      var rotateY = (centerX - x) / 25;
+      card.style.transform = 'perspective(800px) rotateX(' + (-rotateX) + 'deg) rotateY(' + (-rotateY) + 'deg) translateY(-10px)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ===== FLOATING ORB PARALLAX ===== */
+if (window.innerWidth > 768) {
+  var orbs = document.querySelectorAll('.orb');
+  var orbPositions = [];
+  orbs.forEach(function() { orbPositions.push(0); });
+  
+  window.addEventListener('scroll', function() {
+    var scrollY = window.pageYOffset;
+    orbs.forEach(function(orb, i) {
+      var speed = (i % 2 === 0) ? 0.03 : -0.02;
+      var yPos = scrollY * speed;
+      orb.style.transform = 'translateY(' + yPos + 'px)';
+    });
+  }, { passive: true });
+}
+
+/* ===== WAIT FOR LIBS TO LOAD ===== */
+function waitForLibs(cb) {
+  if (typeof VANTA !== 'undefined' && typeof THREE !== 'undefined' && typeof gsap !== 'undefined' && typeof AOS !== 'undefined') {
+    cb();
+  } else {
+    setTimeout(function(){ waitForLibs(cb); }, 100);
+  }
+}
+
+waitForLibs(function() {
+  /* Vanta */
+  initVanta();
+
+  /* AOS - only for hero */
+  AOS.init({ duration: 700, once: true, offset: 80, easing: 'ease-out-cubic' });
+
+  /* GSAP + ScrollTrigger */
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Navbar scroll */
+  ScrollTrigger.create({
+    start: 'top -80',
+    onUpdate: function(self) {
+      document.getElementById('navbar').classList.toggle('scrolled', self.progress > 0);
+    }
+  });
+
+  /* Steps progress line */
+  if (document.getElementById('stepsProgress') && window.innerWidth > 768) {
+    gsap.to('#stepsProgress', {
+      width: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#how-it-works',
+        start: 'top 70%',
+        end: 'bottom 60%',
+        scrub: 1
+      }
+    });
+  }
+
+  /* Count-up animation for problem numbers */
+  document.querySelectorAll('.problem-number').forEach(function(el) {
+    var target = parseInt(el.getAttribute('data-count'));
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '%';
+    var obj = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: function() {
+        gsap.to(obj, {
+          val: target,
+          duration: 2.5,
+          ease: 'power2.out',
+          onUpdate: function() {
+            el.textContent = prefix + Math.round(obj.val) + suffix;
+          }
+        });
+      }
+    });
+  });
+
+  /* ===== GSAP PARALLAX ON SECTION HEADERS ===== */
+  document.querySelectorAll('.section-header .section-title').forEach(function(title) {
+    gsap.fromTo(title, 
+      { y: 20 },
+      { y: -20, ease: 'none',
+        scrollTrigger: {
+          trigger: title,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.5
+        }
+      }
+    );
+  });
+
+  /* ===== PRICING CARD STAGGER (extra polish with GSAP) ===== */
+  gsap.utils.toArray('.pricing-card').forEach(function(card, i) {
+    gsap.fromTo(card.querySelectorAll('.pricing-features li'), 
+      { opacity: 0, x: -15 },
+      { opacity: 1, x: 0, duration: 0.4, stagger: 0.06, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+          once: true
+        }
+      }
+    );
+  });
+
+  /* ===== STEPS STAGGER ANIMATION ===== */
+  gsap.utils.toArray('.step').forEach(function(step, i) {
+    gsap.fromTo(step, 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7, delay: i * 0.2, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.steps-container',
+          start: 'top 80%',
+          once: true
+        }
+      }
+    );
+  });
+
+  /* ===== FOOTER REVEAL ===== */
+  gsap.fromTo('footer .footer-top > div', 
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power3.out',
+      scrollTrigger: {
+        trigger: 'footer',
+        start: 'top 85%',
+        once: true
+      }
+    }
+  );
+
+  /* ===== SECTION DIVIDER ANIMATION ===== */
+  document.querySelectorAll('.section-divider').forEach(function(div) {
+    gsap.fromTo(div, 
+      { opacity: 0 },
+      { opacity: 1, duration: 1, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: div,
+          start: 'top 90%',
+          once: true
+        }
+      }
+    );
+    // Animate the dot across
+    gsap.fromTo(div, 
+      { '--dot-pos': '10%' },
+      { '--dot-pos': '90%', duration: 2, ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: div,
+          start: 'top 90%',
+          once: true
+        }
+      }
+    );
+  });
+
+}); /* end waitForLibs */
+
+/* ===== CUSTOM CURSOR ===== */
+var dot = document.getElementById('cursorDot');
+var ring = document.getElementById('cursorRing');
+var mx = 0, my = 0, dx = 0, dy = 0;
+if (window.innerWidth > 768) {
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx - 4 + 'px';
+    dot.style.top = my - 4 + 'px';
+  });
+  (function animateCursor() {
+    dx += (mx - dx) * 0.15;
+    dy += (my - dy) * 0.15;
+    ring.style.left = dx - 18 + 'px';
+    ring.style.top = dy - 18 + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+  document.querySelectorAll('a, button, .faq-question, .industry-card, .pricing-card, .solution-card, .testimonial-card, input, select, textarea').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', function() { ring.classList.remove('hover'); });
+  });
+}
+
+/* ===== MOBILE MENU ===== */
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+var mobileOverlay = document.getElementById('mobileOverlay');
+function closeMobile() {
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  mobileOverlay.classList.remove('active');
+}
+hamburger.addEventListener('click', function() {
+  var isOpen = mobileMenu.classList.contains('active');
+  if (isOpen) { closeMobile(); }
+  else {
+    hamburger.classList.add('active');
+    mobileMenu.classList.add('active');
+    mobileOverlay.classList.add('active');
+  }
+});
+mobileOverlay.addEventListener('click', closeMobile);
+document.querySelectorAll('.mobile-link').forEach(function(a) {
+  a.addEventListener('click', closeMobile);
+});
+
+/* ===== FAQ ACCORDION ===== */
+document.querySelectorAll('.faq-question').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = q.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var isActive = item.classList.contains('active');
+    /* close all */
+    document.querySelectorAll('.faq-item').forEach(function(fi) {
+      fi.classList.remove('active');
+      fi.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ===== CONTACT FORM ===== */
+var contactForm = document.getElementById('contactForm');
+contactForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  var data = {
+    fullName: document.getElementById('fullName').value,
+    email: document.getElementById('email').value,
+    businessName: document.getElementById('businessName').value,
+    phone: document.getElementById('phone').value,
+    industry: document.getElementById('industry').value,
+    message: document.getElementById('message').value,
+    source: 'website-contact-form'
+  };
+  fetch('https://syedazmul.app.n8n.cloud/webhook/gym-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(function() {
+    contactForm.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }).catch(function() {
+    contactForm.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+});
+
+/* ===== CHAT BOT & WIDGET LOGIC (INFERNO AI) ===== */
+const OPENROUTER_API_KEY = typeof process !== 'undefined' && process.env ? process.env.NEXT_PUBLIC_OPENROUTER_API_KEY : (window.NEXT_PUBLIC_OPENROUTER_API_KEY || "");
+const INFERNO_SYSTEM_PROMPT = `You are "Inferno", the friendly, professional, and confident AI chatbot assistant for Infernex.
+Your goal is to answer customer questions about Infernex services, pricing, and offerings.
+
+INFERNEX BUSINESS INFORMATION:
+- What is Infernex: A next-generation AI agency building intelligent AI agents, stunning websites, and automation systems. We automate customer communication, lead capture, appointment booking, and follow-ups 24/7.
+- Location: Globally remote, serving clients primarily in the US.
+- Status: New-generation AI agency onboarding founding clients.
+- Differentiation: 1) Done-for-you (we build/manage everything), 2) 48-hour setup, 3) Affordable enterprise-level AI.
+- Core Services:
+  1. AI Agents (voice receptionists answering 24/7 like a human, booking appointments, capturing leads, sending confirmation SMS).
+  2. Website Development (modern, fast, fully responsive sites designed to convert visitors).
+  3. Automation Systems (CRM management, email/SMS campaigns, reminders, reporting).
+- Pricing (Gyms & Fitness):
+  * Basic AI Lead Machine: $500 setup (one time) + $199/month. Includes 24/7 Voice Receptionist, Website Chat Widget, Google Sheets Dashboard, Trial Booking, SMS Confirmation, Owner Email Alerts, Monthly Report.
+  * AI Receptionist Pro: $1,500 setup (one time) + $399/month. Includes Basic + Outbound Follow-up Calls, Airtable CRM Dashboard, Renewal Reminders, SMS/Email Campaigns, Analytics Dashboard, Monthly Strategy Call.
+  * AI Gym Operating System: $3,000 setup (one time) + $799/month. Includes Pro + AI Sales Agent (handles objections), Multi-location (up to 3 gyms), Staff Management, Owner AI Assistant (WhatsApp/Telegram), FB Ads Integration, Priority Support.
+  * Custom plans/pricing are available (email contact@infernex.in).
+  * No contract (30-day cancellation policy).
+- Process: Discovery Call (30 min) -> We Build (24-48 hrs) -> Go Live.
+- Technology Used: Vapi AI, Claude AI, Twilio, n8n, Google Sheets, Airtable, Looker Studio.
+- Setup Details: No website needed to use the voice receptionist.
+- Contact Email: contact@infernex.in
+
+BEHAVIOR RULES (CRITICAL):
+1. NEVER say "we don't do that". If asked about an unlisted service/industry, ALWAYS say yes and direct to contact@infernex.in for custom requirements.
+2. ALWAYS end with a call to action. End every response with one of:
+   - "Book a free demo at infernex.in"
+   - "Email us at contact@infernex.in"
+   - "Use the contact form on our website"
+3. NEVER make up prices. Only quote the exact prices listed. For anything else, say "For custom pricing, email contact@infernex.in".
+4. NEVER say "I don't know". If you don't know, say: "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours."
+5. BE POSITIVE AND CONFIDENT. No negative words, no "unfortunately" or "sorry we can't".
+6. FOR ANY OTHER BUSINESS TYPE (schools, hospitals, clinics, salons, real estate, etc.): Say: "Yes, we work with [business type] businesses. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote."
+7. URGENCY: Mention the Founding Partner Offer if appropriate: "We currently have limited founding partner spots available at a special rate. These fill up quickly. Email contact@infernex.in to check availability."
+8. Keep answers concise but complete. Name of the bot is Inferno.`;
+
+// Shared chat history
+let chatHistory = [
+  { role: "system", content: INFERNO_SYSTEM_PROMPT }
+];
+
+async function callNemotronAPI(userMessage, onDone, onError) {
+  chatHistory.push({ role: "user", content: userMessage });
+  
+  // Keep only system prompt + last 10 messages to keep context window clean
+  if (chatHistory.length > 12) {
+    chatHistory = [
+      chatHistory[0],
+      ...chatHistory.slice(chatHistory.length - 10)
+    ];
+  }
+
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": window.location.origin,
+        "X-Title": "Infernex Inferno Chatbot"
+      },
+      body: JSON.stringify({
+        model: "nvidia/llama-3.1-nemotron-70b-instruct",
+        messages: chatHistory,
+        temperature: 0.5,
+        max_tokens: 400
+      })
+    });
+
+    if (!response.ok) throw new Error("API request failed");
+    
+    const data = await response.json();
+    const assistantReply = data.choices[0].message.content;
+    
+    chatHistory.push({ role: "assistant", content: assistantReply });
+    onDone(assistantReply);
+  } catch (error) {
+    console.error("OpenRouter Error:", error);
+    // Fallback response complying with Rule 4 and Rule 2
+    const fallbackText = "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
+    chatHistory.push({ role: "assistant", content: fallbackText });
+    onError(fallbackText);
+  }
+}
+
+/* === INLINE CHATBOX INTERACTION === */
+const inlineMessages = document.getElementById("infernoMessages");
+const inlineInput = document.getElementById("infernoInput");
+const inlineSend = document.getElementById("infernoSend");
+
+function addInlineMsg(text, type) {
+  const div = document.createElement("div");
+  div.className = `inline-chat-msg ${type}`;
+  div.textContent = text;
+  inlineMessages.appendChild(div);
+  inlineMessages.scrollTop = inlineMessages.scrollHeight;
+}
+
+function showInlineTyping() {
+  const div = document.createElement("div");
+  div.className = "inline-chat-typing";
+  div.id = "inlineTypingIndicator";
+  div.innerHTML = "<span></span><span></span><span></span>";
+  inlineMessages.appendChild(div);
+  inlineMessages.scrollTop = inlineMessages.scrollHeight;
+}
+
+function hideInlineTyping() {
+  const indicator = document.getElementById("inlineTypingIndicator");
+  if (indicator) indicator.remove();
+}
+
+function sendInlineChat() {
+  const text = inlineInput.value.trim();
+  if (!text) return;
+  
+  addInlineMsg(text, "user");
+  inlineInput.value = "";
+  showInlineTyping();
+
+  callNemotronAPI(text, (reply) => {
+    hideInlineTyping();
+    addInlineMsg(reply, "bot");
+  }, (fallback) => {
+    hideInlineTyping();
+    addInlineMsg(fallback, "bot");
+  });
+}
+
+inlineSend.addEventListener("click", sendInlineChat);
+inlineInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendInlineChat();
+});
+
+window.sendInlineSuggestion = function(text) {
+  inlineInput.value = text;
+  sendInlineChat();
+};
+
+/* === FLOATING CHAT WIDGET INTERACTION === */
+const chatToggle = document.getElementById("chatToggle");
+const chatWindow = document.getElementById("chatWindow");
+const chatClose = document.getElementById("chatClose");
+const chatInput = document.getElementById("chatInput");
+const chatSend = document.getElementById("chatSend");
+const chatMessages = document.getElementById("chatMessages");
+
+chatToggle.addEventListener("click", () => {
+  chatWindow.classList.toggle("active");
+  if (chatWindow.classList.contains("active")) chatInput.focus();
+});
+
+chatClose.addEventListener("click", () => {
+  chatWindow.classList.remove("active");
+});
+
+function addFloatingMsg(text, type) {
+  const div = document.createElement("div");
+  div.className = `chat-msg ${type}`;
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showFloatingTyping() {
+  const div = document.createElement("div");
+  div.className = "chat-typing";
+  div.id = "floatingTypingIndicator";
+  div.innerHTML = "<span></span><span></span><span></span>";
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideFloatingTyping() {
+  const indicator = document.getElementById("floatingTypingIndicator");
+  if (indicator) indicator.remove();
+}
+
+function sendFloatingChat() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  addFloatingMsg(text, "user");
+  chatInput.value = "";
+  showFloatingTyping();
+
+  callNemotronAPI(text, (reply) => {
+    hideFloatingTyping();
+    addFloatingMsg(reply, "bot");
+  }, (fallback) => {
+    hideFloatingTyping();
+    addFloatingMsg(fallback, "bot");
+  });
+}
+
+chatSend.addEventListener("click", sendFloatingChat);
+chatInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendFloatingChat();
+});
+
+}); /* end DOMContentLoaded */
+</script>
+</body>
+</html>

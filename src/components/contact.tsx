@@ -27,68 +27,70 @@ const challengesList = [
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { margin: "-10%" });
+  const [chatHistory, setChatHistory] = useState<Array<{ role: string; content: string }>>([
+    { role: "system", content: INFERNO_SYSTEM_PROMPT }
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    businessType: "",
-    challenge: "",
-    otherChallenge: "",
-    email: "",
-    phone: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  
-  // Use searchParams carefully. Needs suspense boundary usually, but we are client side.
-  // We'll extract features from URL if any (e.g., from Custom Plan Calculator)
-  const [features, setFeatures] = useState<string>("");
-
-  useEffect(() => {
-    // Basic extraction to avoid full Suspense wrapping complexity for this demo
-    if (typeof window !== "undefined") {
-      const search = new URLSearchParams(window.location.search || window.location.hash.split("?")[1]);
-      if (search.get("features")) {
-        setFeatures(search.get("features") || "");
-      }
-    }
-  }, []);
-
-  const handleNext = () => setStep(step + 1);
-  const handleBack = () => setStep(step - 1);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const handleSend = async (messageText?: string) => {
+    const text = messageText || inputValue.trim();
+    if (!text) return;
     
+    const updatedHistory = [...chatHistory, { role: "user", content: text }];
+    setChatHistory(updatedHistory);
+    setInputValue("");
+    setIsTyping(true);
+
+    // Auto scroll
+    setTimeout(() => {
+      const scrollDiv = document.getElementById("inferno-messages-scroll");
+      if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    }, 50);
+
     try {
-      await fetch("https://formsubmit.co/ajax/contact@infernex.in", {
+      let historyToSend = updatedHistory;
+      if (historyToSend.length > 12) {
+        historyToSend = [
+          historyToSend[0],
+          ...historyToSend.slice(historyToSend.length - 10)
+        ];
+      }
+
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
-        headers: { 
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "",
+          "X-Title": "Infernex Inferno Chatbot"
         },
         body: JSON.stringify({
-          Name: formData.name,
-          Email: formData.email,
-          Phone: formData.phone,
-          "Business Type": formData.businessType,
-          Challenge: formData.challenge === "Other" ? formData.otherChallenge : formData.challenge,
-          "Selected Features": features,
-          "_subject": "New Contact Form Lead - Infernex AI"
+          model: "nvidia/llama-3.1-nemotron-70b-instruct",
+          messages: historyToSend,
+          temperature: 0.5,
+          max_tokens: 400
         })
       });
-      setIsSuccess(true);
-    } catch (error) {
-      console.error("Form submission error:", error);
-      // Even if webhook fails (CORS etc), show success for demo purposes to user
-      setIsSuccess(true);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
-  return (
+      if (!response.ok) throw new Error("API request failed");
+      
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+      
+      setChatHistory(prev => [...prev, { role: "assistant", content: reply }]);
+    } catch (error) {
+      console.error("OpenRouter API error:", error);
+      const fallbackText = "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours.";
+      setChatHistory(prev => [...prev, { role: "assistant", content: fallbackText }]);
+    } finally {
+      setIsTyping(false);
+      setTimeout(() => {
+        const scrollDiv = document.getElementById("inferno-messages-scroll");
+        if (scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
+      }, 50);
+    }
+  };  return (
     <section 
       ref={sectionRef}
       id="contact" 
@@ -211,161 +213,85 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Right Column: Multi-step Form */}
-          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-10 shadow-2xl relative">
-            <AnimatePresence mode="wait">
-              {!isSuccess ? (
-                <motion.div
-                  key="form"
-                  initial={{ opacity: 0, x: 15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -15 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.8 }}
-                >
-                  {/* Progress Indicator */}
-                  <div className="flex gap-2 mb-8">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${i <= step ? "bg-accent" : "bg-card-border"}`} />
-                    ))}
+          {/* Right Column: Inferno Chatbot Box */}
+          <div className="bg-card border border-card-border rounded-3xl p-6 md:p-8 shadow-2xl relative flex flex-col h-[550px] overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center gap-3 border-b border-card-border pb-4 mb-4 shrink-0">
+              <div className="w-3.5 h-3.5 rounded-full bg-[#00ffaa] shadow-[0_0_10px_#00ffaa] animate-pulse" />
+              <div>
+                <h3 className="font-space-grotesk font-bold text-lg text-text-primary">INFERNO AI</h3>
+                <p className="text-xs text-text-secondary">Online • Answers instantly</p>
+              </div>
+            </div>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1 scrollbar-thin scrollbar-thumb-card-border" id="inferno-messages-scroll">
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent shrink-0 font-bold text-xs font-space-grotesk">I</div>
+                <div className="bg-primary/40 border border-card-border p-3.5 rounded-2xl rounded-tl-sm text-sm text-text-primary leading-relaxed max-w-[85%]">
+                  Hi there! I am Inferno, Infernex&apos;s AI assistant. Ask me anything about our services, plans, pricing, or how we can automate your business 24/7!
+                </div>
+              </div>
+
+              {chatHistory.slice(1).map((msg, idx) => (
+                <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
+                  {msg.role !== 'user' && (
+                    <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent shrink-0 font-bold text-xs font-space-grotesk">I</div>
+                  )}
+                  <div className={`p-3.5 rounded-2xl text-sm leading-relaxed max-w-[85%] ${
+                    msg.role === 'user' 
+                      ? 'bg-accent-gradient text-white rounded-tr-sm' 
+                      : 'bg-primary/40 border border-card-border text-text-primary rounded-tl-sm'
+                  }`}>
+                    {msg.content}
                   </div>
+                </div>
+              ))}
 
-                  <form onSubmit={step === 4 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }}>
-                    
-                    {/* Step 1 */}
-                    {step === 1 && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
-                        <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What&apos;s your name?</h3>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="Full Name"
-                          className="w-full bg-primary border border-card-border rounded-xl px-4 py-4 text-text-primary outline-none focus:border-accent transition-colors text-base"
-                        />
-                        <button type="submit" className="w-full h-14 rounded-full bg-accent-gradient text-white font-semibold flex items-center justify-center gap-2">
-                          Continue <span className="text-xl">→</span>
-                        </button>
-                      </motion.div>
-                    )}
-
-                    {/* Step 2 */}
-                    {step === 2 && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
-                        <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What type of business you have, {formData.name.split(' ')[0]}?</h3>
-                        <input
-                          type="text"
-                          required
-                          value={formData.businessType}
-                          onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
-                          placeholder="E.g. E-commerce, Local Gym, SaaS..."
-                          className="w-full bg-primary border border-card-border rounded-xl px-4 py-4 text-text-primary outline-none focus:border-accent transition-colors text-base"
-                          autoFocus
-                        />
-                        <div className="flex gap-4">
-                          <button type="button" onClick={handleBack} className="px-6 rounded-full border border-card-border text-text-primary hover:bg-primary transition-colors font-medium">
-                            Back
-                          </button>
-                          <button type="submit" className="flex-1 h-14 rounded-full bg-accent-gradient text-white font-semibold flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(196,30,58,0.3)]">
-                            Continue <span className="text-xl">→</span>
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Step 3 */}
-                    {step === 3 && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
-                        <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">What&apos;s your biggest challenge?</h3>
-                        <div className="flex flex-col gap-3">
-                          {challengesList.map((challenge) => (
-                            <button
-                              key={challenge.id}
-                              type="button"
-                              onClick={() => { 
-                                setFormData({ ...formData, challenge: challenge.text }); 
-                                if (challenge.id !== "other") handleNext(); 
-                              }}
-                              className={`p-4 rounded-xl border text-left flex items-center gap-3 transition-colors ${formData.challenge === challenge.text ? "border-accent bg-accent/5" : "border-card-border bg-primary hover:border-accent/50"}`}
-                            >
-                              <span className="text-accent shrink-0">
-                                <challenge.icon size={18} strokeWidth={1.5} />
-                              </span>
-                              <span className="font-medium text-text-primary text-sm">{challenge.text}</span>
-                            </button>
-                          ))}
-                          {formData.challenge === "Other" && (
-                            <div className="flex gap-2">
-                              <input
-                                type="text"
-                                required
-                                value={formData.otherChallenge}
-                                onChange={(e) => setFormData({ ...formData, otherChallenge: e.target.value })}
-                                placeholder="Please specify..."
-                                className="flex-1 bg-primary border border-card-border rounded-xl px-4 py-3 text-text-primary outline-none focus:border-accent transition-colors text-base"
-                                autoFocus
-                              />
-                              <button type="button" onClick={handleNext} className="px-6 rounded-xl bg-accent text-white font-medium">Next</button>
-                            </div>
-                          )}
-                        </div>
-                        <button type="button" onClick={handleBack} className="text-text-secondary text-sm hover:text-text-primary transition-colors mt-4 inline-block">← Back</button>
-                      </motion.div>
-                    )}
-
-                    {/* Step 4 */}
-                    {step === 4 && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 400, damping: 25 }} className="space-y-6">
-                        <h3 className="font-space-grotesk font-bold text-2xl text-text-primary">How can we reach you?</h3>
-                        <div className="space-y-4">
-                          <input
-                            type="email"
-                            required
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            placeholder="Email address"
-                            className="w-full bg-primary border border-card-border rounded-xl px-4 py-4 text-text-primary outline-none focus:border-accent transition-colors text-base"
-                          />
-                          <input
-                            type="tel"
-                            required
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder="Phone number"
-                            className="w-full bg-primary border border-card-border rounded-xl px-4 py-4 text-text-primary outline-none focus:border-accent transition-colors text-base"
-                          />
-                        </div>
-                        <div className="flex gap-4">
-                          <button type="button" onClick={handleBack} className="px-6 rounded-full border border-card-border text-text-primary hover:bg-primary transition-colors font-medium">
-                            Back
-                          </button>
-                          <button disabled={isSubmitting} type="submit" className="flex-1 h-14 rounded-full bg-accent-gradient text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-70 shadow-[0_0_15px_rgba(196,30,58,0.3)]">
-                            {isSubmitting ? "Submitting..." : "Book My Free Demo →"}
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </form>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="text-center py-12 flex flex-col items-center"
-                >
-                  <div className="w-20 h-20 bg-green-500/10 border border-green-500/30 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(34,197,94,0.15)]">
-                    <Check size={36} strokeWidth={2.5} />
+              {isTyping && (
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center text-accent shrink-0 font-bold text-xs font-space-grotesk">I</div>
+                  <div className="bg-primary/40 border border-card-border p-3.5 rounded-2xl rounded-tl-sm flex gap-1 items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-text-secondary animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-text-secondary animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-text-secondary animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
-                  <h3 className="font-space-grotesk font-bold text-3xl text-text-primary mb-4">Booked!</h3>
-                  <p className="text-text-secondary text-lg mb-8">We&apos;ll reach out within 24 hours.</p>
-                  <Link href="#services" className="text-accent font-medium hover:underline flex items-center gap-2">
-                    In the meantime, explore what we&apos;ve built <span>→</span>
-                  </Link>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
+            </div>
+
+            {/* Suggestions */}
+            <div className="flex gap-2 overflow-x-auto pb-3 shrink-0 scrollbar-none">
+              {['What is Infernex?', 'Pricing Plans', 'AI Receptionist', 'Book a free demo'].map((sug, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSend(sug)}
+                  disabled={isTyping}
+                  className="px-4 py-2 rounded-full bg-primary/40 border border-card-border text-xs text-text-secondary hover:border-accent hover:text-text-primary transition-colors whitespace-nowrap"
+                >
+                  {sug}
+                </button>
+              ))}
+            </div>
+
+            {/* Input Form */}
+            <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2 shrink-0 border-t border-card-border pt-4">
+              <input
+                type="text"
+                disabled={isTyping}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Ask Inferno about Infernex..."
+                className="flex-1 bg-primary border border-card-border rounded-full px-5 py-3 text-sm text-text-primary outline-none focus:border-accent transition-colors disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={isTyping || !inputValue.trim()}
+                className="w-12 h-12 rounded-full bg-accent-gradient text-white flex items-center justify-center shrink-0 hover:scale-105 transition-transform disabled:opacity-50"
+              >
+                <Bot size={20} />
+              </button>
+            </form>
           </div>
 
         </div>
@@ -373,3 +299,40 @@ export default function Contact() {
     </section>
   );
 }
+
+// System Prompt
+const INFERNO_SYSTEM_PROMPT = `You are "Inferno", the friendly, professional, and confident AI chatbot assistant for Infernex.
+Your goal is to answer customer questions about Infernex services, pricing, and offerings.
+
+INFERNEX BUSINESS INFORMATION:
+- What is Infernex: A next-generation AI agency building intelligent AI agents, stunning websites, and automation systems. We automate customer communication, lead capture, appointment booking, and follow-ups 24/7.
+- Location: Globally remote, serving clients primarily in the US.
+- Status: New-generation AI agency onboarding founding clients.
+- Differentiation: 1) Done-for-you (we build/manage everything), 2) 48-hour setup, 3) Affordable enterprise-level AI.
+- Core Services:
+  1. AI Agents (voice receptionists answering 24/7 like a human, booking appointments, capturing leads, sending confirmation SMS).
+  2. Website Development (modern, fast, fully responsive sites designed to convert visitors).
+  3. Automation Systems (CRM management, email/SMS campaigns, reminders, reporting).
+- Pricing (Gyms & Fitness):
+  * Basic AI Lead Machine: $500 setup (one time) + $199/month. Includes 24/7 Voice Receptionist, Website Chat Widget, Google Sheets Dashboard, Trial Booking, SMS Confirmation, Owner Email Alerts, Monthly Report.
+  * AI Receptionist Pro: $1,500 setup (one time) + $399/month. Includes Basic + Outbound Follow-up Calls, Airtable CRM Dashboard, Renewal Reminders, SMS/Email Campaigns, Analytics Dashboard, Monthly Strategy Call.
+  * AI Gym Operating System: $3,000 setup (one time) + $799/month. Includes Pro + AI Sales Agent (handles objections), Multi-location (up to 3 gyms), Staff Management, Owner AI Assistant (WhatsApp/Telegram), FB Ads Integration, Priority Support.
+  * Custom plans/pricing are available (email contact@infernex.in).
+  * No contract (30-day cancellation policy).
+- Process: Discovery Call (30 min) -> We Build (24-48 hrs) -> Go Live.
+- Technology Used: Vapi AI, Claude AI, Twilio, n8n, Google Sheets, Airtable, Looker Studio.
+- Setup Details: No website needed to use the voice receptionist.
+- Contact Email: contact@infernex.in
+
+BEHAVIOR RULES (CRITICAL):
+1. NEVER say "we don't do that". If asked about an unlisted service/industry, ALWAYS say yes and direct to contact@infernex.in for custom requirements.
+2. ALWAYS end with a call to action. End every response with one of:
+   - "Book a free demo at infernex.in"
+   - "Email us at contact@infernex.in"
+   - "Use the contact form on our website"
+3. NEVER make up prices. Only quote the exact prices listed. For anything else, say "For custom pricing, email contact@infernex.in".
+4. NEVER say "I don't know". If you don't know, say: "Great question! Our team can answer that in detail. Email us at contact@infernex.in and we will get back to you within 24 hours."
+5. BE POSITIVE AND CONFIDENT. No negative words, no "unfortunately" or "sorry we can't".
+6. FOR ANY OTHER BUSINESS TYPE (schools, hospitals, clinics, salons, real estate, etc.): Say: "Yes, we work with [business type] businesses. Our team can build a custom AI system for your specific needs. Email contact@infernex.in to discuss your requirements and get a custom quote."
+7. URGENCY: Mention the Founding Partner Offer if appropriate: "We currently have limited founding partner spots available at a special rate. These fill up quickly. Email contact@infernex.in to check availability."
+8. Keep answers concise but complete. Name of the bot is Inferno.`;
