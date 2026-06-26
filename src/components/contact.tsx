@@ -81,19 +81,13 @@ export default function Contact() {
         ];
       }
 
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "",
-          "X-Title": "Infernex Inferno Chatbot"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "nvidia/llama-3.1-nemotron-70b-instruct",
-          messages: historyToSend,
-          temperature: 0.5,
-          max_tokens: 400
+          messages: historyToSend
         })
       });
 
