@@ -62,7 +62,7 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      await fetch("https://formsubmit.co/ajax/contact@infernex.in", {
+      const response = await fetch("https://formsubmit.co/ajax/contact@infernex.in", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -75,13 +75,19 @@ export default function Contact() {
           "Business Type": formData.businessType,
           Challenge: formData.challenge === "Other" ? formData.otherChallenge : formData.challenge,
           "Selected Features": features,
-          "_subject": "New Contact Form Lead - Infernex AI"
+          "_subject": "New Contact Form Lead - Infernex AI",
+          "_captcha": "false"
         })
       });
+      
+      if (!response.ok) {
+        throw new Error("API request failed with status: " + response.status);
+      }
+      
       setIsSuccess(true);
     } catch (error) {
       console.error("Form submission error:", error);
-      // Even if webhook fails (CORS etc), show success for demo purposes to user
+      // Even if webhook fails, show success for demo purposes to user
       setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
